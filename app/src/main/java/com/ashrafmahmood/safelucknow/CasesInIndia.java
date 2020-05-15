@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CasesInIndia extends AppCompatActivity {
 
-    TextView total,active, recov, deaths,jData;
+    TextView total,active, recov, deaths, jData;
 
 
     DatabaseReference reff;
@@ -38,11 +38,11 @@ public class CasesInIndia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cases_in_india);
 
-        total = findViewById(R.id.total);
-        active = findViewById(R.id.active);
-        recov = findViewById(R.id.recov);
-        deaths = findViewById(R.id.deaths);
-        jData = findViewById(R.id.jData);
+        total = (TextView)findViewById(R.id.total);
+        active = (TextView)findViewById(R.id.active);
+        recov = (TextView)findViewById(R.id.recov);
+        deaths = (TextView)findViewById(R.id.deaths);
+        jData = (TextView)findViewById(R.id.jData);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.covid19india.org/")
