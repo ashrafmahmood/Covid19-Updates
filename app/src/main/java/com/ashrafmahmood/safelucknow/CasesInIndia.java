@@ -15,9 +15,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class CasesInIndia extends AppCompatActivity {
 
-    TextView total,active, recov, deaths;
+    TextView total,active, recov, deaths,jData;
 
 
     DatabaseReference reff;
@@ -33,6 +41,42 @@ public class CasesInIndia extends AppCompatActivity {
         active = findViewById(R.id.active);
         recov = findViewById(R.id.recov);
         deaths = findViewById(R.id.deaths);
+        jData = findViewById(R.id.jData);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.covid19india.org/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        COVID19IndiaApi covid19IndiaApi = retrofit.create(COVID19IndiaApi.class);
+
+        Call<List<datajson>> call = covid19IndiaApi.getPosts();
+
+        call.enqueue(new Callback<List<datajson>>() {
+            @Override
+            public void onResponse(Call<List<datajson>> call, Response<List<datajson>> response) {
+
+                if(!response.isSuccessful()){
+                    jData.setText("code: "+ response.code());
+                    return;
+                }
+                List<datajson> datajsons = response.body();
+
+
+
+                String d[] = new String[7];
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<datajson>> call, Throwable t) {
+                jData.setText(t.getMessage());
+
+            }
+        });
 
 
 
