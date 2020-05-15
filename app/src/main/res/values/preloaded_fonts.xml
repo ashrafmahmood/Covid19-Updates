@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/</item>
+        <item>@font/anonymous_pro</item>
+        <item>@font/baloo</item>
+        <item>@font/bilbo_swash_caps</item>
+        <item>@font/bitter</item>
+        <item>@font/bungee_outline</item>
+        <item>@font/cagliostro</item>
+        <item>@font/glegoo</item>
+        <item>@font/holtwood_one_sc</item>
+        <item>@font/miriam_libre</item>
+    </array>
+</resources>

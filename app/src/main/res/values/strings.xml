@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">COVID19 UPDATES</string>
+    <string name="lucknow_covid19_cases">COVID19 CASES IN LUCKNOW</string>
+    <string name="_00">00</string>
+    <string name="deaths">DEATHS</string>
+
+    <string name="recovered">RECOVERED</string>
+
+    <string name="active">ACTIVE</string>
+
+    <string name="total">TOTAL</string>
+    <string name="green_zone">Green Zone</string>
+    <string name="orange_zone">Orange Zone</string>
+    <string name="red_zone">Red Zone</string>
+
+    <string name="more">More</string>
+    <string name="sources">Sources</string>
+    <string name="about">About</string>
+    <string name="cases_in_india">Cases In India</string>
+    <string name="hotspots">Hotspots in Lucknow</string>
+    <string name="covid19_cases_in_india">COVID19 CASES IN INDIA</string>
+    <string name="migrated">MIGRATED</string>
+    <string name="what_s_allowed_what_s_not">What\'s Allowed, What\'s Not</string>
+    <string name="cases_in_up">Cases in UP</string>
+
+</resources>
