@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,7 +51,7 @@ public class CasesInIndia extends AppCompatActivity {
 
         COVID19IndiaApi covid19IndiaApi = retrofit.create(COVID19IndiaApi.class);
 
-        Call<List<datajson>> call = covid19IndiaApi.getPosts();
+        Call<List<datajson>> call = covid19IndiaApi. getdatajsons();
 
         call.enqueue(new Callback<List<datajson>>() {
             @Override
@@ -62,9 +63,16 @@ public class CasesInIndia extends AppCompatActivity {
                 }
                 List<datajson> datajsons = response.body();
 
+                String s ="";
+                for (datajson d : datajsons)
+                {
+                       s = d.getCases_time_series()[4];
+                }
+                jData.setText(s);
 
 
-                String d[] = new String[7];
+
+
 
 
 

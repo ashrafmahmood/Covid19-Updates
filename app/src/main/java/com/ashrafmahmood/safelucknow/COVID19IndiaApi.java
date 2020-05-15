@@ -8,5 +8,5 @@ import retrofit2.http.GET;
 public interface COVID19IndiaApi {
 
     @GET("data.json")
-    Call<List<datajson>> getPosts();
+    Call<List<datajson>> getdatajsons();
 }
