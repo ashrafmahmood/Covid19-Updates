@@ -141,18 +141,18 @@ public class CasesInUp extends AppCompatActivity {
                         dRecov.setText(dR);
                         dTotal.setText(dT);
                         dDeaths.setText(dD);
-                        if (Integer.parseInt(dR)>0)
+                        if (!dR.equals("0"))
                         {
                             greenArrow.setVisibility(View.VISIBLE);
                             dRecov.setVisibility(View.VISIBLE);
 
                         }
-                        if (Integer.parseInt(dT)>0)
+                        if (!dT.equals("0"))
                         {
                             redArrow.setVisibility(View.VISIBLE);
                             dTotal.setVisibility(View.VISIBLE);
                         }
-                        if (Integer.parseInt(dD)>0)
+                        if (!dD.equals("0"))
                         {
                             greyArrow.setVisibility(View.VISIBLE);
                             dDeaths.setVisibility(View.VISIBLE);

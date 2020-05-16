@@ -15,9 +15,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="380dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/round_layout_box"
         android:orientation="vertical">
 
@@ -25,9 +25,9 @@
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="20dp"
             android:fontFamily="@font/holtwood_one_sc"
             android:gravity="center_horizontal"
             android:text="COVID19 CASES IN INDIA"
@@ -37,8 +37,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/red_back"
             android:gravity="right"
             android:orientation="horizontal">
@@ -69,7 +69,8 @@
                 android:id="@+id/dTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/glegoo"
                 android:text="0"
                 android:textColor="#9C0003"
                 android:textSize="14sp" />
@@ -92,9 +93,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/blue_back"
             android:gravity="right"
             android:orientation="horizontal">
@@ -124,7 +125,8 @@
                 android:id="@+id/dActive"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/glegoo"
                 android:gravity="right"
                 android:text="0"
                 android:textColor="#2196f3"
@@ -148,9 +150,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/green_back"
             android:gravity="right"
             android:orientation="horizontal">
@@ -180,10 +182,11 @@
                 android:id="@+id/dRecov"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/glegoo"
                 android:gravity="right"
                 android:text="0"
-                android:textColor="#1b5e20"
+                android:textColor="#134415"
                 android:textSize="14sp" />
 
             <TextView
@@ -204,9 +207,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/gray_back"
             android:gravity="right"
             android:orientation="horizontal">
@@ -236,7 +239,8 @@
                 android:id="@+id/dDeaths"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/glegoo"
                 android:gravity="right"
                 android:text="0"
                 android:textColor="#1F1E1E"

@@ -81,7 +81,8 @@
                      android:id="@+id/dTotal"
                      android:layout_width="wrap_content"
                      android:layout_height="match_parent"
-                     android:layout_marginTop="10dp"
+                     android:layout_marginTop="7dp"
+                     android:fontFamily="@font/glegoo"
                      android:text="0"
                      android:textColor="#9C0003"
                      android:textSize="14sp" />
@@ -136,7 +137,8 @@
                      android:id="@+id/dActive"
                      android:layout_width="wrap_content"
                      android:layout_height="match_parent"
-                     android:layout_marginTop="10dp"
+                     android:layout_marginTop="7dp"
+                     android:fontFamily="@font/glegoo"
                      android:gravity="right"
                      android:text="0"
                      android:textColor="#2196f3"
@@ -192,10 +194,11 @@
                      android:id="@+id/dRecov"
                      android:layout_width="wrap_content"
                      android:layout_height="match_parent"
-                     android:layout_marginTop="10dp"
+                     android:layout_marginTop="7dp"
+                     android:fontFamily="@font/glegoo"
                      android:gravity="right"
                      android:text="0"
-                     android:textColor="#1b5e20"
+                     android:textColor="#134415"
                      android:textSize="14sp" />
 
                  <TextView
@@ -248,7 +251,8 @@
                      android:id="@+id/dDeaths"
                      android:layout_width="wrap_content"
                      android:layout_height="match_parent"
-                     android:layout_marginTop="10dp"
+                     android:layout_marginTop="7dp"
+                     android:fontFamily="@font/glegoo"
                      android:gravity="right"
                      android:text="0"
                      android:textColor="#1F1E1E"
