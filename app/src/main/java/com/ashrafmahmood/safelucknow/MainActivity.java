@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 4000;
 
-    TextView total,active, recov, deaths, rz, oz, gz, tvUpdate, tvLink;
+    TextView total,active, recov, deaths, rz, oz, gz, tvUpdate, tvLink,dRecov,dTotal,dDeaths;
     Button btnHotspot;
+    ImageView redArrow,greenArrow, greyArrow;
 
 
 
@@ -46,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
         active = findViewById(R.id.active);
         recov = findViewById(R.id.recov);
         deaths = findViewById(R.id.deaths);
+        dRecov = findViewById(R.id.dRecov);
+        dTotal = findViewById(R.id.dTotal);
+        dDeaths = findViewById(R.id.dDeaths);
+        redArrow = findViewById(R.id.redArrow);
+        greyArrow = findViewById(R.id.greyArrow);
+        greenArrow = findViewById(R.id.greenArrow);
 
         btnHotspot = findViewById(R.id.btnHotspot);
 
@@ -84,6 +91,19 @@ public class MainActivity extends AppCompatActivity {
                         String sta = dataSnapshot.child("Status").getValue().toString();
                         String up = dataSnapshot.child("UpdatesAvail").getValue().toString();
                         final String upLink = dataSnapshot.child("UpdateLink").getValue().toString();
+                        String dR = dataSnapshot.child("DailyRecovered").getValue().toString();
+                        String dT = dataSnapshot.child("DailyTotal").getValue().toString();
+                        String dD = dataSnapshot.child("DailyDeaths").getValue().toString();
+
+                        redArrow.setVisibility(View.GONE);
+                        greenArrow.setVisibility(View.GONE);
+                        greyArrow.setVisibility(View.GONE);
+                        dTotal.setVisibility(View.GONE);
+                        dRecov.setVisibility(View.GONE);
+                        dDeaths.setVisibility(View.GONE);
+
+
+
                         if (sta.equalsIgnoreCase("R")) {
                             rz.setVisibility(View.VISIBLE);
                             oz.setVisibility(View.GONE);
@@ -125,6 +145,28 @@ public class MainActivity extends AppCompatActivity {
                         active.setText(act);
                         recov.setText(rec);
                         deaths.setText(dea);
+                        dRecov.setText(dR);
+                        dTotal.setText(dT);
+                        dDeaths.setText(dD);
+                        if (Integer.parseInt(dR)>0)
+                        {
+                            greenArrow.setVisibility(View.VISIBLE);
+                            dRecov.setVisibility(View.VISIBLE);
+
+                        }
+                        if (Integer.parseInt(dT)>0)
+                        {
+                            redArrow.setVisibility(View.VISIBLE);
+                            dTotal.setVisibility(View.VISIBLE);
+                        }
+                        if (Integer.parseInt(dD)>0)
+                        {
+                            greyArrow.setVisibility(View.VISIBLE);
+                            dDeaths.setVisibility(View.VISIBLE);
+
+                        }
+
+
                     }
 
                     @Override

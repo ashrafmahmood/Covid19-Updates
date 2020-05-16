@@ -17,7 +17,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CasesInIndia extends AppCompatActivity {
 
-    TextView total,active, recov, deaths;
+    TextView total,active, recov, deaths,dRecov,dTotal,dDeaths;
+    ImageView redArrow,greenArrow, greyArrow;
 
 
     DatabaseReference reff;
@@ -33,6 +34,12 @@ public class CasesInIndia extends AppCompatActivity {
         active = findViewById(R.id.active);
         recov = findViewById(R.id.recov);
         deaths = findViewById(R.id.deaths);
+        dRecov = findViewById(R.id.dRecov);
+        dTotal = findViewById(R.id.dTotal);
+        dDeaths = findViewById(R.id.dDeaths);
+        redArrow = findViewById(R.id.redArrow);
+        greyArrow = findViewById(R.id.greyArrow);
+        greenArrow = findViewById(R.id.greenArrow);
 
 
 
@@ -48,10 +55,40 @@ public class CasesInIndia extends AppCompatActivity {
                         String rec = dataSnapshot.child("Recovered").getValue().toString();
                         String dea = dataSnapshot.child("Deaths").getValue().toString();
                         String migr = dataSnapshot.child("Migrated").getValue().toString();
+                        String dR = dataSnapshot.child("DailyRecovered").getValue().toString();
+                        String dT = dataSnapshot.child("DailyTotal").getValue().toString();
+                        String dD = dataSnapshot.child("DailyDeaths").getValue().toString();
+                        redArrow.setVisibility(View.GONE);
+                        greenArrow.setVisibility(View.GONE);
+                        greyArrow.setVisibility(View.GONE);
+                        dTotal.setVisibility(View.GONE);
+                        dRecov.setVisibility(View.GONE);
+                        dDeaths.setVisibility(View.GONE);
+
                         total.setText(tot);
                         active.setText(act);
                         recov.setText(rec);
                         deaths.setText(dea);
+                        dRecov.setText(dR);
+                        dTotal.setText(dT);
+                        dDeaths.setText(dD);
+                        if (Integer.parseInt(dR)>0)
+                        {
+                            greenArrow.setVisibility(View.VISIBLE);
+                            dRecov.setVisibility(View.VISIBLE);
+
+                        }
+                        if (Integer.parseInt(dT)>0)
+                        {
+                            redArrow.setVisibility(View.VISIBLE);
+                            dTotal.setVisibility(View.VISIBLE);
+                        }
+                        if (Integer.parseInt(dD)>0)
+                        {
+                            greyArrow.setVisibility(View.VISIBLE);
+                            dDeaths.setVisibility(View.VISIBLE);
+
+                        }
                        
                     }
 
