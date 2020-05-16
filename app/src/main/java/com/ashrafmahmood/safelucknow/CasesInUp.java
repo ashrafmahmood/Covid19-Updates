@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CasesInUp extends AppCompatActivity {
-    TextView total,active, recov, deaths,rNo,oNo,gNo;
+    TextView total,active, recov, deaths,rNo,oNo,gNo,dRecov,dTotal;
     Spinner rzd,ozd,gzd;
     ImageView refresh;
 
@@ -47,6 +47,8 @@ public class CasesInUp extends AppCompatActivity {
         active = findViewById(R.id.active);
         recov = findViewById(R.id.recov);
         deaths = findViewById(R.id.deaths);
+        dRecov = findViewById(R.id.dRecov);
+        dTotal = findViewById(R.id.dTotal);
 
         rNo = findViewById(R.id.rNo);
         oNo = findViewById(R.id.oNo);
@@ -110,6 +112,8 @@ public class CasesInUp extends AppCompatActivity {
                         String o = dataSnapshot.child("OrangeZones").getValue().toString();
                         String g = dataSnapshot.child("GreenZones").getValue().toString();
                         String r = dataSnapshot.child("RedZones").getValue().toString();
+                                String dR = dataSnapshot.child("DailyRecovered").getValue().toString();
+                                String dT = dataSnapshot.child("DailyTotal").getValue().toString();
 
 
 
@@ -121,6 +125,8 @@ public class CasesInUp extends AppCompatActivity {
                         rNo.setText(r);
                         oNo.setText(o);
                         gNo.setText(g);
+                        dRecov.setText(dR);
+                        dTotal.setText(dT);
 
 
 

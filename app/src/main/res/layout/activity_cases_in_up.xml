@@ -57,7 +57,7 @@
 
                  <TextView
                      android:id="@+id/tvrz"
-                     android:layout_width="85dp"
+                     android:layout_width="80dp"
                      android:layout_height="40dp"
                      android:layout_marginLeft="5dp"
                      android:layout_marginRight="10dp"
@@ -70,16 +70,33 @@
                      android:textSize="22sp"
                      android:textStyle="bold" />
 
+                 <ImageView
+                     android:id="@+id/imageView"
+                     android:layout_width="15dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="7dp"
+                     app:srcCompat="@drawable/arrow_upward" />
+
+                 <TextView
+                     android:id="@+id/dTotal"
+                     android:layout_width="wrap_content"
+                     android:layout_height="match_parent"
+                     android:layout_marginTop="10dp"
+                     android:gravity="right"
+                     android:text="0"
+                     android:textColor="#9C0003"
+                     android:textSize="14sp" />
+
                  <TextView
                      android:id="@+id/total"
-                     android:layout_width="wrap_content"
+                     android:layout_width="40dp"
                      android:layout_height="40dp"
-                     android:layout_marginLeft="10dp"
+                     android:layout_marginLeft="2dp"
                      android:layout_marginRight="5dp"
                      android:layout_marginBottom="5dp"
                      android:layout_weight="1"
                      android:fontFamily="@font/glegoo"
-                     android:gravity="center_horizontal"
+                     android:gravity="fill_horizontal"
                      android:text="@string/_00"
                      android:textColor="#FFFFFF"
                      android:textSize="22sp"
@@ -97,7 +114,7 @@
 
                  <TextView
                      android:id="@+id/textView8"
-                     android:layout_width="85dp"
+                     android:layout_width="80dp"
                      android:layout_height="40dp"
                      android:layout_marginLeft="5dp"
                      android:layout_marginRight="10dp"
@@ -112,14 +129,14 @@
 
                  <TextView
                      android:id="@+id/active"
-                     android:layout_width="wrap_content"
+                     android:layout_width="40dp"
                      android:layout_height="40dp"
                      android:layout_marginLeft="10dp"
                      android:layout_marginRight="5dp"
                      android:layout_marginBottom="5dp"
                      android:layout_weight="1"
                      android:fontFamily="@font/glegoo"
-                     android:gravity="center_horizontal"
+                     android:gravity="fill_horizontal"
                      android:text="@string/_00"
                      android:textColor="#F9FAFC"
                      android:textSize="22sp"
@@ -137,7 +154,7 @@
 
                  <TextView
                      android:id="@+id/textView10"
-                     android:layout_width="85dp"
+                     android:layout_width="80dp"
                      android:layout_height="40dp"
                      android:layout_marginLeft="5dp"
                      android:layout_marginRight="10dp"
@@ -150,16 +167,33 @@
                      android:textSize="22sp"
                      android:textStyle="bold" />
 
+                 <ImageView
+                     android:id="@+id/imageVie"
+                     android:layout_width="15dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="7dp"
+                     app:srcCompat="@drawable/arrow_upward_green" />
+
+                 <TextView
+                     android:id="@+id/dRecov"
+                     android:layout_width="wrap_content"
+                     android:layout_height="match_parent"
+                     android:layout_marginTop="10dp"
+                     android:gravity="right"
+                     android:text="0"
+                     android:textColor="#1b5e20"
+                     android:textSize="14sp" />
+
                  <TextView
                      android:id="@+id/recov"
-                     android:layout_width="wrap_content"
+                     android:layout_width="40dp"
                      android:layout_height="40dp"
-                     android:layout_marginLeft="10dp"
+                     android:layout_marginLeft="2dp"
                      android:layout_marginRight="5dp"
                      android:layout_marginBottom="5dp"
                      android:layout_weight="1"
                      android:fontFamily="@font/glegoo"
-                     android:gravity="center_horizontal"
+                     android:gravity="center_horizontal|fill_horizontal"
                      android:text="@string/_00"
                      android:textColor="#FFFFFF"
                      android:textSize="22sp"
@@ -177,7 +211,7 @@
 
                  <TextView
                      android:id="@+id/textView12"
-                     android:layout_width="85dp"
+                     android:layout_width="80dp"
                      android:layout_height="40dp"
                      android:layout_marginLeft="5dp"
                      android:layout_marginRight="10dp"
@@ -192,14 +226,14 @@
 
                  <TextView
                      android:id="@+id/deaths"
-                     android:layout_width="wrap_content"
+                     android:layout_width="40dp"
                      android:layout_height="40dp"
                      android:layout_marginLeft="10dp"
                      android:layout_marginRight="5dp"
                      android:layout_marginBottom="5dp"
                      android:layout_weight="1"
                      android:fontFamily="@font/glegoo"
-                     android:gravity="center_horizontal"
+                     android:gravity="fill_horizontal"
                      android:text="@string/_00"
                      android:textColor="#FFFFFF"
                      android:textSize="22sp"
