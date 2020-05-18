@@ -4,13 +4,13 @@
     android:shape="rectangle"
     >
 
+
     <gradient
-        android:angle="225"
+        android:angle="45"
 
-        android:endColor="#ff7043"
+        android:endColor="#66bb6a"
 
-        android:startColor="#bf360c"/>
-
+        android:startColor="#1b5e20"/>
 
     <padding
         android:left="5dp"

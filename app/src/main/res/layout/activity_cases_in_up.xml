@@ -47,11 +47,12 @@
                  app:srcCompat="@drawable/refresh" />
 
              <LinearLayout
+                 android:id="@+id/layout_red"
                  android:layout_width="match_parent"
                  android:layout_height="55dp"
                  android:layout_marginLeft="20dp"
                  android:layout_marginRight="20dp"
-                 android:background="@drawable/red_back"
+                 android:background="@drawable/red_back_list"
                  android:gravity="right"
                  android:orientation="horizontal">
 
@@ -103,12 +104,13 @@
              </LinearLayout>
 
              <LinearLayout
+                 android:id="@+id/layout_blue"
                  android:layout_width="match_parent"
                  android:layout_height="55dp"
                  android:layout_marginLeft="20dp"
                  android:layout_marginTop="10dp"
                  android:layout_marginRight="20dp"
-                 android:background="@drawable/blue_back"
+                 android:background="@drawable/blue_back_list"
                  android:gravity="right"
                  android:orientation="horizontal">
 
@@ -126,24 +128,6 @@
                      android:textSize="22sp"
                      android:textStyle="bold" />
 
-                 <ImageView
-                     android:id="@+id/blueArrow"
-                     android:layout_width="15dp"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="7dp"
-                     app:srcCompat="@drawable/arrow_upward_blue" />
-
-                 <TextView
-                     android:id="@+id/dActive"
-                     android:layout_width="wrap_content"
-                     android:layout_height="match_parent"
-                     android:layout_marginTop="7dp"
-                     android:fontFamily="@font/glegoo"
-                     android:gravity="right"
-                     android:text="0"
-                     android:textColor="#2196f3"
-                     android:textSize="14sp" />
-
                  <TextView
                      android:id="@+id/active"
                      android:layout_width="wrap_content"
@@ -160,12 +144,13 @@
              </LinearLayout>
 
              <LinearLayout
+                 android:id="@+id/layout_green"
                  android:layout_width="match_parent"
                  android:layout_height="55dp"
                  android:layout_marginLeft="20dp"
                  android:layout_marginTop="10dp"
                  android:layout_marginRight="20dp"
-                 android:background="@drawable/green_back"
+                 android:background="@drawable/green_back_list"
                  android:gravity="right"
                  android:orientation="horizontal">
 
@@ -217,12 +202,13 @@
              </LinearLayout>
 
              <LinearLayout
+                 android:id="@+id/layout_gray"
                  android:layout_width="match_parent"
                  android:layout_height="55dp"
                  android:layout_marginLeft="20dp"
                  android:layout_marginTop="10dp"
                  android:layout_marginRight="20dp"
-                 android:background="@drawable/gray_back"
+                 android:background="@drawable/gray_back_list"
                  android:gravity="right"
                  android:orientation="horizontal">
 

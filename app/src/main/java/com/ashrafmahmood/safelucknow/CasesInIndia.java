@@ -3,6 +3,7 @@ package com.ashrafmahmood.safelucknow;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ public class CasesInIndia extends AppCompatActivity {
 
     TextView total,active, recov, deaths,dRecov,dTotal,dDeaths;
     ImageView redArrow,greenArrow, greyArrow;
+    LinearLayout layout_red,layout_blue,layout_green, layout_gray;
 
 
     DatabaseReference reff;
@@ -40,6 +42,28 @@ public class CasesInIndia extends AppCompatActivity {
         redArrow = findViewById(R.id.redArrow);
         greyArrow = findViewById(R.id.greyArrow);
         greenArrow = findViewById(R.id.greenArrow);
+        layout_red = findViewById(R.id.layout_red);
+        layout_blue = findViewById(R.id.layout_blue);
+        layout_green = findViewById(R.id.layout_green);
+        layout_gray = findViewById(R.id.layout_gray);
+
+        AnimationDrawable adR = (AnimationDrawable)layout_red.getBackground();
+        adR.setEnterFadeDuration(2000);
+        adR.setExitFadeDuration(2000);
+
+        adR.start();
+        AnimationDrawable adB = (AnimationDrawable)layout_blue.getBackground();
+        adB.setEnterFadeDuration(2000);
+        adB.setExitFadeDuration(2000);
+        adB.start();
+        AnimationDrawable adG = (AnimationDrawable)layout_green.getBackground();
+        adG.setEnterFadeDuration(2000);
+        adG.setExitFadeDuration(2000);
+        adG.start();
+        AnimationDrawable adGr = (AnimationDrawable)layout_gray.getBackground();
+        adGr.setEnterFadeDuration(2000);
+        adGr.setExitFadeDuration(2000);
+        adGr.start();
 
 
 

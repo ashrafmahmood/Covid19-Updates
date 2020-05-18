@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ public class CasesInUp extends AppCompatActivity {
     TextView total,active, recov, deaths,rNo,oNo,gNo,dRecov,dTotal,dDeaths;
     Spinner rzd,ozd,gzd;
     ImageView refresh, redArrow,greenArrow, greyArrow;
+    LinearLayout layout_red,layout_blue,layout_green, layout_gray;
 
     DatabaseReference reff;
 
@@ -53,6 +56,28 @@ public class CasesInUp extends AppCompatActivity {
         redArrow = findViewById(R.id.redArrow);
         greyArrow = findViewById(R.id.greyArrow);
         greenArrow = findViewById(R.id.greenArrow);
+        layout_red = findViewById(R.id.layout_red);
+        layout_blue = findViewById(R.id.layout_blue);
+        layout_green = findViewById(R.id.layout_green);
+        layout_gray = findViewById(R.id.layout_gray);
+
+        AnimationDrawable adR = (AnimationDrawable)layout_red.getBackground();
+        adR.setEnterFadeDuration(2000);
+        adR.setExitFadeDuration(2000);
+
+        adR.start();
+        AnimationDrawable adB = (AnimationDrawable)layout_blue.getBackground();
+        adB.setEnterFadeDuration(2000);
+        adB.setExitFadeDuration(2000);
+        adB.start();
+        AnimationDrawable adG = (AnimationDrawable)layout_green.getBackground();
+        adG.setEnterFadeDuration(2000);
+        adG.setExitFadeDuration(2000);
+        adG.start();
+        AnimationDrawable adGr = (AnimationDrawable)layout_gray.getBackground();
+        adGr.setEnterFadeDuration(2000);
+        adGr.setExitFadeDuration(2000);
+        adGr.start();
 
 
 
@@ -183,16 +208,6 @@ public class CasesInUp extends AppCompatActivity {
                             gData.add(item.getValue().toString());
                         }
                         adapter.notifyDataSetChanged();
-
-
-
-
-
-
-
-
-
-
 
 
                     }

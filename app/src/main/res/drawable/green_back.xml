@@ -4,14 +4,13 @@
     android:shape="rectangle"
     >
 
-    <solid
-        android:color="#388e3c" >
-    </solid>
 
-    <stroke
-        android:width="5dp"
-        android:color="#1b5e20" >
-    </stroke>
+    <gradient
+        android:angle="225"
+
+        android:endColor="#66bb6a"
+
+        android:startColor="#1b5e20"/>
 
     <padding
         android:left="5dp"

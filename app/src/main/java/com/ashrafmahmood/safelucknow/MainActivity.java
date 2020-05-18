@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     TextView total,active, recov, deaths, rz, oz, gz, tvUpdate, tvLink,dRecov,dTotal,dDeaths;
     Button btnHotspot;
     ImageView redArrow,greenArrow, greyArrow;
+    LinearLayout layout_red,layout_blue,layout_green, layout_gray;
 
 
 
@@ -55,6 +58,34 @@ public class MainActivity extends AppCompatActivity {
         greenArrow = findViewById(R.id.greenArrow);
 
         btnHotspot = findViewById(R.id.btnHotspot);
+
+
+        layout_red = findViewById(R.id.layout_red);
+        layout_blue = findViewById(R.id.layout_blue);
+        layout_green = findViewById(R.id.layout_green);
+        layout_gray = findViewById(R.id.layout_gray);
+
+        AnimationDrawable adR = (AnimationDrawable)layout_red.getBackground();
+        adR.setEnterFadeDuration(2000);
+        adR.setExitFadeDuration(2000);
+
+        adR.start();
+        AnimationDrawable adB = (AnimationDrawable)layout_blue.getBackground();
+        adB.setEnterFadeDuration(2000);
+        adB.setExitFadeDuration(2000);
+        adB.start();
+        AnimationDrawable adG = (AnimationDrawable)layout_green.getBackground();
+        adG.setEnterFadeDuration(2000);
+        adG.setExitFadeDuration(2000);
+        adG.start();
+        AnimationDrawable adGr = (AnimationDrawable)layout_gray.getBackground();
+        adGr.setEnterFadeDuration(2000);
+        adGr.setExitFadeDuration(2000);
+        adGr.start();
+        AnimationDrawable adbtn = (AnimationDrawable)btnHotspot.getBackground();
+        adbtn.setEnterFadeDuration(2000);
+        adbtn.setExitFadeDuration(2000);
+        adbtn.start();
 
         rz = findViewById(R.id.rz);
         oz = findViewById(R.id.oz);
