@@ -18,7 +18,7 @@
 
          <LinearLayout
              android:layout_width="match_parent"
-             android:layout_height="380dp"
+             android:layout_height="400dp"
              android:layout_marginLeft="10dp"
              android:layout_marginTop="20dp"
              android:layout_marginRight="10dp"
@@ -34,7 +34,7 @@
                  android:layout_marginRight="15dp"
                  android:fontFamily="@font/holtwood_one_sc"
                  android:gravity="center_horizontal"
-                 android:text="COVID19 CASES IN UTTAR PRADESH"
+                 android:text="COVID19 CASES IN\nUTTAR PRADESH"
                  android:textSize="22sp" />
 
 
