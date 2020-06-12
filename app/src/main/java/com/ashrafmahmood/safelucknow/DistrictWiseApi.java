@@ -6,10 +6,10 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 
-public interface COVID19IndiaApi {
-    String BASE_URL = "https://api.covid19india.org/";
+public interface DistrictWiseApi {
+
 
     @Headers("Content-Type: application/json")
-    @GET("data.json")
-    Call<datajson> getdatajsons();
+    @GET("state_district_wise.json")
+    Call<districtWise> getdistrictWise();
 }

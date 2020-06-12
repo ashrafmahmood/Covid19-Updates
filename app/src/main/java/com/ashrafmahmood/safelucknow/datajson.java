@@ -1,16 +1,55 @@
 package com.ashrafmahmood.safelucknow;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class datajson {
 
+    @SerializedName("cases_time_series")
+    @Expose
+    private ArrayList<cases> cases_time_series;
 
-    private String cases_time_series [];
-    private String statewise[];
+    @SerializedName("statewise")
+    @Expose
+    private ArrayList<statewisedata> statewise;
+    @SerializedName("tested")
+    @Expose
+    private ArrayList<test> tested;
 
-    public String[] getCases_time_series() {
+    public ArrayList<cases> getCases_time_series() {
         return cases_time_series;
     }
 
-    public String[] getStatewise() {
+    public void setCases_time_series(ArrayList<cases> cases_time_series) {
+        this.cases_time_series = cases_time_series;
+    }
+
+    public ArrayList<statewisedata> getStatewise() {
         return statewise;
     }
+
+    public void setStatewise(ArrayList<statewisedata> statewise) {
+        this.statewise = statewise;
+    }
+
+    public ArrayList<test> getTested() {
+        return tested;
+    }
+
+    public void setTested(ArrayList<test> tested) {
+        this.tested = tested;
+    }
+
+    @Override
+    public String toString() {
+        return "datajson{" +
+                "cases_time_series=" + cases_time_series +
+                ", statewise=" + statewise +
+                ", tested=" + tested +
+                '}';
+    }
 }
+

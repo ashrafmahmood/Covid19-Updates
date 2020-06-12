@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,10 +28,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CasesInIndia extends AppCompatActivity {
 
-    TextView total,active, recov, deaths, jData;
+    TextView total,active, recov, deaths, jData,test ;
+    private  static final String BASE_URL = "https://api.covid19india.org/";
+    private static final String TAG = "CasesInIndia";
 
 
-    DatabaseReference reff;
 
 
 
@@ -43,45 +46,45 @@ public class CasesInIndia extends AppCompatActivity {
         recov = (TextView)findViewById(R.id.recov);
         deaths = (TextView)findViewById(R.id.deaths);
         jData = (TextView)findViewById(R.id.jData);
+        test = findViewById(R.id.test);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.covid19india.org/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         COVID19IndiaApi covid19IndiaApi = retrofit.create(COVID19IndiaApi.class);
 
-        Call<List<datajson>> call = covid19IndiaApi. getdatajsons();
+        Call<datajson> call = covid19IndiaApi.getdatajsons();
 
-        call.enqueue(new Callback<List<datajson>>() {
+        call.enqueue(new Callback<datajson>() {
             @Override
-            public void onResponse(Call<List<datajson>> call, Response<List<datajson>> response) {
+            public void onResponse(Call<datajson> call, Response<datajson> response) {
 
-                if(!response.isSuccessful()){
-                    jData.setText("code: "+ response.code());
+                if (!response.isSuccessful()) {
+                    Toast.makeText(CasesInIndia.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                List<datajson> datajsons = response.body();
-
-                String s ="";
-                for (datajson d : datajsons)
+                datajson data = response.body();
+                ArrayList<cases> s = data.getCases_time_series();
+                String str="";
+                for(cases c: s)
                 {
-                       s = d.getCases_time_series()[4];
+                    str = c.getDailyconfirmed();
+                    total.setText(c.getTotalconfirmed());
+                    recov.setText(c.getTotalrecovered());
+                    deaths.setText(c.getTotaldeceased());
+                    int n = Integer.parseInt(c.getTotalconfirmed())-(Integer.parseInt(c.getTotaldeceased())+Integer.parseInt(c.getTotalrecovered()));
+                    active.setText(Integer.toString(n));
+
                 }
-                jData.setText(s);
-
-
-
-
-
-
-
 
             }
 
             @Override
-            public void onFailure(Call<List<datajson>> call, Throwable t) {
-                jData.setText(t.getMessage());
+            public void onFailure(Call<datajson> call, Throwable t) {
+
+                Toast.makeText(CasesInIndia.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -91,7 +94,7 @@ public class CasesInIndia extends AppCompatActivity {
 
 
 
-                reff = FirebaseDatabase.getInstance().getReference().child("CasesInIndia");
+                /*reff = FirebaseDatabase.getInstance().getReference().child("CasesInIndia");
                 reff.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -111,7 +114,7 @@ public class CasesInIndia extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });*/
 
 
 
