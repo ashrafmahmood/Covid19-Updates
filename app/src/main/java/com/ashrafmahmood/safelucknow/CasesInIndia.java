@@ -1,15 +1,27 @@
 package com.ashrafmahmood.safelucknow;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.COVID19IndiaApi;
 import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.cases;
 import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.datajson;
+import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.statewisedata;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -20,11 +32,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CasesInIndia extends AppCompatActivity {
 
-    TextView total,active, recov, deaths, jData,test ;
-    private  static final String BASE_URL = "https://api.covid19india.org/";
-    private static final String TAG = "CasesInIndia";
+    TextView total,active, recov, deaths, dTotal,dRecov,dDeaths;
+    ImageView redArrow, greenArrow,greyArrow;
 
 
+    DatabaseReference reff;
 
 
 
@@ -33,15 +45,49 @@ public class CasesInIndia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cases_in_india);
 
-        total = (TextView)findViewById(R.id.total);
-        active = (TextView)findViewById(R.id.active);
-        recov = (TextView)findViewById(R.id.recov);
-        deaths = (TextView)findViewById(R.id.deaths);
-        jData = (TextView)findViewById(R.id.jData);
-        test = findViewById(R.id.test);
+        total = findViewById(R.id.total);
+        active = findViewById(R.id.active);
+        recov = findViewById(R.id.recov);
+        deaths = findViewById(R.id.deaths);
+        dTotal = findViewById(R.id.dTotal);
+        active = findViewById(R.id.active);
+        dRecov = findViewById(R.id.dRecov);
+        dDeaths = findViewById(R.id.dDeaths);
+        dTotal.setVisibility(View.GONE);
+        dRecov.setVisibility(View.GONE);
+        dDeaths.setVisibility(View.GONE);
+        redArrow = findViewById(R.id.redArrow);
+        greenArrow = findViewById(R.id.greenArrow);
+        greyArrow = findViewById(R.id.greyArrow);
+        redArrow.setVisibility(View.GONE);
+        greenArrow.setVisibility(View.GONE);
+        greyArrow.setVisibility(View.GONE);
+
+
+        LinearLayout linearLayout1 = findViewById(R.id.layout_red);
+        AnimationDrawable animationDrawable1 = (AnimationDrawable) linearLayout1.getBackground();
+        animationDrawable1.setEnterFadeDuration(2000);
+        animationDrawable1.setExitFadeDuration(2000);
+        animationDrawable1.start();
+        LinearLayout linearLayout2 = findViewById(R.id.layout_blue);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout2.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.start();
+        LinearLayout linearLayout3 = findViewById(R.id.layout_green);
+        AnimationDrawable animationDrawable3 = (AnimationDrawable) linearLayout3.getBackground();
+        animationDrawable3.setEnterFadeDuration(2000);
+        animationDrawable3.setExitFadeDuration(2000);
+        animationDrawable3.start();
+        LinearLayout linearLayout = findViewById(R.id.layout_gray);
+        AnimationDrawable animationDrawable4 = (AnimationDrawable) linearLayout.getBackground();
+        animationDrawable4.setEnterFadeDuration(2000);
+        animationDrawable4.setExitFadeDuration(2000);
+        animationDrawable4.start();
+
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl("https://api.covid19india.org/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -59,15 +105,33 @@ public class CasesInIndia extends AppCompatActivity {
                 }
                 datajson data = response.body();
                 ArrayList<cases> s = data.getCases_time_series();
-                String str="";
+                NumberFormat myformat = NumberFormat.getInstance();
                 for(cases c: s)
                 {
-                    str = c.getDailyconfirmed();
-                    total.setText(c.getTotalconfirmed());
-                    recov.setText(c.getTotalrecovered());
-                    deaths.setText(c.getTotaldeceased());
-                    int n = Integer.parseInt(c.getTotalconfirmed())-(Integer.parseInt(c.getTotaldeceased())+Integer.parseInt(c.getTotalrecovered()));
-                    active.setText(Integer.toString(n));
+
+                        total.setText(myformat.format(Integer.parseInt(c.getTotalconfirmed())));
+                        recov.setText(myformat.format(Integer.parseInt(c.getTotalrecovered())));
+                        deaths.setText(myformat.format(Integer.parseInt(c.getTotaldeceased())));
+
+                        active.setText(myformat.format(Integer.parseInt(c.getTotalconfirmed())-(Integer.parseInt(c.getTotaldeceased())+Integer.parseInt(c.getTotalrecovered()))));
+                        if (!c.getDailyconfirmed().equals("0"))
+                        {
+                            dTotal.setText(myformat.format(Integer.parseInt(c.getDailyconfirmed())));
+                            dTotal.setVisibility(View.VISIBLE);
+                            redArrow.setVisibility(View.VISIBLE);
+                        }
+                    if (!c.getDailyrecovered().equals("0"))
+                    {
+                        dRecov.setText(myformat.format(Integer.parseInt(c.getDailyrecovered())));
+                        dRecov.setVisibility(View.VISIBLE);
+                        greenArrow.setVisibility(View.VISIBLE);
+                    }
+                    if (!c.getDailydeceased().equals("0"))
+                    {
+                        dDeaths.setText(myformat.format(Integer.parseInt(c.getDailydeceased())));
+                        dDeaths.setVisibility(View.VISIBLE);
+                        greyArrow.setVisibility(View.VISIBLE);
+                    }
 
                 }
 
@@ -99,7 +163,7 @@ public class CasesInIndia extends AppCompatActivity {
                         active.setText(act);
                         recov.setText(rec);
                         deaths.setText(dea);
-                       
+
                     }
 
                     @Override

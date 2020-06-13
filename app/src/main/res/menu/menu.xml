@@ -11,9 +11,7 @@
     <item android:id="@+id/India"
         android:title="@string/cases_in_india"
          />
-    <item android:id="@+id/DosDonts"
-        android:title="@string/what_s_allowed_what_s_not"
-        />
+
     <item android:id="@+id/more"
         android:title="@string/more"
          >

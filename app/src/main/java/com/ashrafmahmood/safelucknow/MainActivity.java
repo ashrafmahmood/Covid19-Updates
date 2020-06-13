@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 4000;
     private static final String TAG = "MainActivity";
 
-    TextView total,active, recov, deaths, rz, oz, gz, tvUpdate, tvLink;
+    TextView total,active, recov, deaths, rz, oz, gz, tvUpdate, tvLink, dTotal,dRecov,dDeaths;
     Button btnHotspot;
-
+    ImageView redArrow, greenArrow,greyArrow;
 
 
     DatabaseReference reff;
@@ -52,6 +57,20 @@ public class MainActivity extends AppCompatActivity {
         active = findViewById(R.id.active);
         recov = findViewById(R.id.recov);
         deaths = findViewById(R.id.deaths);
+        dTotal = findViewById(R.id.dTotal);
+        active = findViewById(R.id.active);
+        dRecov = findViewById(R.id.dRecov);
+        dDeaths = findViewById(R.id.dDeaths);
+        dTotal.setVisibility(View.GONE);
+        dRecov.setVisibility(View.GONE);
+        dDeaths.setVisibility(View.GONE);
+
+        redArrow = findViewById(R.id.redArrow);
+        greenArrow = findViewById(R.id.greenArrow);
+        greyArrow = findViewById(R.id.greyArrow);
+        redArrow.setVisibility(View.GONE);
+        greenArrow.setVisibility(View.GONE);
+        greyArrow.setVisibility(View.GONE);
 
         btnHotspot = findViewById(R.id.btnHotspot);
 
@@ -66,6 +85,26 @@ public class MainActivity extends AppCompatActivity {
         gz.setVisibility(View.GONE);
         tvUpdate.setVisibility(View.GONE);
         tvLink.setVisibility(View.GONE);
+        LinearLayout linearLayout1 = findViewById(R.id.layout_red);
+        AnimationDrawable animationDrawable1 = (AnimationDrawable) linearLayout1.getBackground();
+        animationDrawable1.setEnterFadeDuration(2000);
+        animationDrawable1.setExitFadeDuration(2000);
+        animationDrawable1.start();
+        LinearLayout linearLayout2 = findViewById(R.id.layout_blue);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout2.getBackground();
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.start();
+        LinearLayout linearLayout3 = findViewById(R.id.layout_green);
+        AnimationDrawable animationDrawable3 = (AnimationDrawable) linearLayout3.getBackground();
+        animationDrawable3.setEnterFadeDuration(2000);
+        animationDrawable3.setExitFadeDuration(2000);
+        animationDrawable3.start();
+        LinearLayout linearLayout = findViewById(R.id.layout_gray);
+        AnimationDrawable animationDrawable4 = (AnimationDrawable) linearLayout.getBackground();
+        animationDrawable4.setEnterFadeDuration(2000);
+        animationDrawable4.setExitFadeDuration(2000);
+        animationDrawable4.start();
 
         btnHotspot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,11 +197,30 @@ public class MainActivity extends AppCompatActivity {
                 districtWise data = response.body();
 
                         lucknowCases lkoCase = data.getUttar_Pradesh().getDistrictData().getLucknow();
+                NumberFormat myformat = NumberFormat.getInstance();
+                            active.setText(myformat.format(Integer.parseInt(lkoCase.getActive())));
+                            total.setText(myformat.format(Integer.parseInt(lkoCase.getConfirmed())));
+                            recov.setText(myformat.format(Integer.parseInt(lkoCase.getRecovered())));
+                            deaths.setText(myformat.format(Integer.parseInt(lkoCase.getDeceased())));
+                            if(!lkoCase.getDelta().getConfirmed().equals("0"))
+                            {
+                                dTotal.setText(myformat.format(Integer.parseInt(lkoCase.getDelta().getConfirmed())));
+                                dTotal.setVisibility(View.VISIBLE);
+                                redArrow.setVisibility(View.VISIBLE);
+                            }
+                            if (!lkoCase.getDelta().getRecovered().equals("0"))
+                            {
+                                dRecov.setText(myformat.format(Integer.parseInt(lkoCase.getDelta().getRecovered())));
+                                dRecov.setVisibility(View.VISIBLE);
+                                greenArrow.setVisibility(View.VISIBLE);
+                            }
+                            if(!lkoCase.getDelta().getDeceased().equals("0"))
+                            {
+                                dDeaths.setText(myformat.format(Integer.parseInt(lkoCase.getDelta().getDeceased())));
+                                dDeaths.setVisibility(View.VISIBLE);
+                                greyArrow.setVisibility(View.VISIBLE);
+                            }
 
-                            active.setText(lkoCase.getActive());
-                            total.setText(lkoCase.getConfirmed());
-                            recov.setText(lkoCase.getRecovered());
-                            deaths.setText(lkoCase.getDeceased());
 
 
 
