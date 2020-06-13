@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ashrafmahmood.safelucknow.districtzones.ZonesApi;
+import com.ashrafmahmood.safelucknow.districtzones.zonedata;
+import com.ashrafmahmood.safelucknow.districtzones.zones;
 import com.ashrafmahmood.safelucknow.state_district_wise.DistrictWiseApi;
 import com.ashrafmahmood.safelucknow.state_district_wise.districtWise;
 import com.ashrafmahmood.safelucknow.state_district_wise.lucknowCases;
@@ -24,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -115,20 +119,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-                reff = FirebaseDatabase.getInstance().getReference().child("LucknowCovid19Cases");
+                /*reff = FirebaseDatabase.getInstance().getReference().child("LucknowCovid19Cases");
 
 
 
                     reff.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        /*String tot = dataSnapshot.child("Total").getValue().toString();
+                        String tot = dataSnapshot.child("Total").getValue().toString();
                         String act = dataSnapshot.child("Active").getValue().toString();
                         String rec = dataSnapshot.child("Recovered").getValue().toString();
                         String dea = dataSnapshot.child("Deaths").getValue().toString();
                         String sta = dataSnapshot.child("Status").getValue().toString();
                         String up = dataSnapshot.child("UpdatesAvail").getValue().toString();
-                        final String upLink = dataSnapshot.child("UpdateLink").getValue().toString();*/
+                        final String upLink = dataSnapshot.child("UpdateLink").getValue().toString();
                          String sta = dataSnapshot.child("Status").getValue().toString();
                         if (sta.equalsIgnoreCase("R")) {
                             rz.setVisibility(View.VISIBLE);
@@ -146,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                             rz.setVisibility(View.GONE);
                         }
 
-                        /*if(up.equalsIgnoreCase("y"))
+                        if(up.equalsIgnoreCase("y"))
                         {
                             tvUpdate.setVisibility(View.VISIBLE);
                             tvLink.setVisibility(View.VISIBLE);
@@ -170,14 +174,14 @@ public class MainActivity extends AppCompatActivity {
                         total.setText(tot);
                         active.setText(act);
                         recov.setText(rec);
-                        deaths.setText(dea);*/
+                        deaths.setText(dea);
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });*/
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.covid19india.org/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -220,13 +224,6 @@ public class MainActivity extends AppCompatActivity {
                                 dDeaths.setVisibility(View.VISIBLE);
                                 greyArrow.setVisibility(View.VISIBLE);
                             }
-
-
-
-
-
-
-
             }
 
             @Override
@@ -236,6 +233,58 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        ZonesApi zonesApi = retrofit.create(ZonesApi.class);
+
+        Call<zonedata> call1 = zonesApi.getZonedata();
+        call1.enqueue(new Callback<zonedata>() {
+            @Override
+            public void onResponse(Call<zonedata> call, Response<zonedata> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                int r=0, o=0, g=0;
+                zonedata zdata = response.body();
+                ArrayList<zones> z1 = zdata.getZones();
+                for(zones z: z1)
+                {
+                    if(z.getDistrict().equals("Lucknow"))
+                    {
+                        if(z.getZone().equals("Red"))
+                        {
+                            rz.setVisibility(View.VISIBLE);
+                            oz.setVisibility(View.GONE);
+                            gz.setVisibility(View.GONE);
+                        }
+                        else if(z.getZone().equals("Orange"))
+                        {
+                            oz.setVisibility(View.VISIBLE);
+                            rz.setVisibility(View.GONE);
+                            gz.setVisibility(View.GONE);
+                        }
+                        else if(z.getZone().equals("Green"))
+                        {
+                            gz.setVisibility(View.VISIBLE);
+                            oz.setVisibility(View.GONE);
+                            rz.setVisibility(View.GONE);
+
+                        }
+
+
+                    }
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<zonedata> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
 
 
 
