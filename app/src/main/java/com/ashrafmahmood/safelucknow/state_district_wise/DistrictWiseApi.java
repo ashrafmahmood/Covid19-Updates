@@ -1,6 +1,4 @@
-package com.ashrafmahmood.safelucknow;
-
-import java.util.List;
+package com.ashrafmahmood.safelucknow.state_district_wise;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

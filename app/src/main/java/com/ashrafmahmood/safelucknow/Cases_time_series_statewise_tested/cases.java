@@ -1,4 +1,4 @@
-package com.ashrafmahmood.safelucknow;
+package com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

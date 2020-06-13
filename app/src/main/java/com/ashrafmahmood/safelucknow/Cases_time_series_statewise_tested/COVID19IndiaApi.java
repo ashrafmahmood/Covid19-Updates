@@ -1,6 +1,4 @@
-package com.ashrafmahmood.safelucknow;
-
-import java.util.List;
+package com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

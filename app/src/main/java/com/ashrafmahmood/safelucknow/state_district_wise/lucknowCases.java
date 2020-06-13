@@ -1,6 +1,4 @@
-package com.ashrafmahmood.safelucknow;
-
-import java.util.ArrayList;
+package com.ashrafmahmood.safelucknow.state_district_wise;
 
 public class lucknowCases {
 

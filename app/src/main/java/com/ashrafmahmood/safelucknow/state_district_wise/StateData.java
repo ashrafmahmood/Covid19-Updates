@@ -1,6 +1,6 @@
-package com.ashrafmahmood.safelucknow;
+package com.ashrafmahmood.safelucknow.state_district_wise;
 
-import java.util.ArrayList;
+import com.ashrafmahmood.safelucknow.state_district_wise.district;
 
 public class StateData {
 

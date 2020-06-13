@@ -1,9 +1,7 @@
-package com.ashrafmahmood.safelucknow;
+package com.ashrafmahmood.safelucknow.state_district_wise;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
 
 public class districtWise {
     @SerializedName("Uttar Pradesh")

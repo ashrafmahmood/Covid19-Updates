@@ -1,4 +1,4 @@
-package com.ashrafmahmood.safelucknow;
+package com.ashrafmahmood.safelucknow.state_district_wise;
 
 public class lucknowdaily {
     private String confirmed;
