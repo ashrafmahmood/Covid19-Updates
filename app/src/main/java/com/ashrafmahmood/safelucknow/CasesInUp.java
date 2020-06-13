@@ -4,35 +4,35 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.COVID19IndiaApi;
+import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.datajson;
+import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.statewisedata;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CasesInUp extends AppCompatActivity {
-    TextView total,active, recov, deaths,rNo,oNo,gNo,dRecov,dTotal,dDeaths;
+    TextView total,active, recov, deaths,rNo,oNo,gNo,test;
     Spinner rzd,ozd,gzd;
-    ImageView refresh, redArrow,greenArrow, greyArrow;
-    LinearLayout layout_red,layout_blue,layout_green, layout_gray;
+    ImageView refresh;
 
     DatabaseReference reff;
 
@@ -50,36 +50,7 @@ public class CasesInUp extends AppCompatActivity {
         active = findViewById(R.id.active);
         recov = findViewById(R.id.recov);
         deaths = findViewById(R.id.deaths);
-        dRecov = findViewById(R.id.dRecov);
-        dTotal = findViewById(R.id.dTotal);
-        dDeaths = findViewById(R.id.dDeaths);
-        redArrow = findViewById(R.id.redArrow);
-        greyArrow = findViewById(R.id.greyArrow);
-        greenArrow = findViewById(R.id.greenArrow);
-        layout_red = findViewById(R.id.layout_red);
-        layout_blue = findViewById(R.id.layout_blue);
-        layout_green = findViewById(R.id.layout_green);
-        layout_gray = findViewById(R.id.layout_gray);
-
-        AnimationDrawable adR = (AnimationDrawable)layout_red.getBackground();
-        adR.setEnterFadeDuration(2000);
-        adR.setExitFadeDuration(2000);
-
-        adR.start();
-        AnimationDrawable adB = (AnimationDrawable)layout_blue.getBackground();
-        adB.setEnterFadeDuration(2000);
-        adB.setExitFadeDuration(2000);
-        adB.start();
-        AnimationDrawable adG = (AnimationDrawable)layout_green.getBackground();
-        adG.setEnterFadeDuration(2000);
-        adG.setExitFadeDuration(2000);
-        adG.start();
-        AnimationDrawable adGr = (AnimationDrawable)layout_gray.getBackground();
-        adGr.setEnterFadeDuration(2000);
-        adGr.setExitFadeDuration(2000);
-        adGr.start();
-
-
+        test = findViewById(R.id.test);
 
         rNo = findViewById(R.id.rNo);
         oNo = findViewById(R.id.oNo);
@@ -111,8 +82,50 @@ public class CasesInUp extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(CasesInUp.this, R.layout.green_spinner, gData);
         gzd.setAdapter(adapter);
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.covid19india.org/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-                reff = FirebaseDatabase.getInstance().getReference().child("CasesInUp");
+        COVID19IndiaApi covid19IndiaApi = retrofit.create(COVID19IndiaApi.class);
+
+        Call<datajson> call = covid19IndiaApi.getdatajsons();
+
+        call.enqueue(new Callback<datajson>() {
+            @Override
+            public void onResponse(Call<datajson> call, Response<datajson> response) {
+
+                if (!response.isSuccessful()) {
+                    Toast.makeText(CasesInUp.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                datajson data = response.body();
+                ArrayList<statewisedata> s = data.getStatewise();
+
+                for(statewisedata c: s)
+                {
+                    if(c.getStatecode().equals("UP")) {
+                        total.setText(c.getConfirmed());
+                        recov.setText(c.getRecovered());
+                        deaths.setText(c.getDeaths());
+
+                        active.setText(c.getActive());
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<datajson> call, Throwable t) {
+
+                Toast.makeText(CasesInUp.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        /*reff = FirebaseDatabase.getInstance().getReference().child("CasesInUp");
 
 
 
@@ -143,15 +156,6 @@ public class CasesInUp extends AppCompatActivity {
                         String o = dataSnapshot.child("OrangeZones").getValue().toString();
                         String g = dataSnapshot.child("GreenZones").getValue().toString();
                         String r = dataSnapshot.child("RedZones").getValue().toString();
-                                String dR = dataSnapshot.child("DailyRecovered").getValue().toString();
-                                String dT = dataSnapshot.child("DailyTotal").getValue().toString();
-                                String dD = dataSnapshot.child("DailyDeaths").getValue().toString();
-                                redArrow.setVisibility(View.GONE);
-                                greenArrow.setVisibility(View.GONE);
-                                greyArrow.setVisibility(View.GONE);
-                                dTotal.setVisibility(View.GONE);
-                                dRecov.setVisibility(View.GONE);
-                                dDeaths.setVisibility(View.GONE);
 
 
 
@@ -163,27 +167,6 @@ public class CasesInUp extends AppCompatActivity {
                         rNo.setText(r);
                         oNo.setText(o);
                         gNo.setText(g);
-                        dRecov.setText(dR);
-                        dTotal.setText(dT);
-                        dDeaths.setText(dD);
-                        if (!dR.equals("0"))
-                        {
-                            greenArrow.setVisibility(View.VISIBLE);
-                            dRecov.setVisibility(View.VISIBLE);
-
-                        }
-                        if (!dT.equals("0"))
-                        {
-                            redArrow.setVisibility(View.VISIBLE);
-                            dTotal.setVisibility(View.VISIBLE);
-                        }
-                        if (!dD.equals("0"))
-                        {
-                            greyArrow.setVisibility(View.VISIBLE);
-                            dDeaths.setVisibility(View.VISIBLE);
-
-                        }
-
 
 
 
@@ -210,6 +193,16 @@ public class CasesInUp extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
 
 
+
+
+
+
+
+
+
+
+
+
                     }
 
                     @Override
@@ -217,7 +210,7 @@ public class CasesInUp extends AppCompatActivity {
 
                     }
 
-                });
+                });*/
 
 
     }

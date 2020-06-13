@@ -1,29 +1,30 @@
 package com.ashrafmahmood.safelucknow;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.COVID19IndiaApi;
+import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.cases;
+import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.datajson;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CasesInIndia extends AppCompatActivity {
 
-    TextView total,active, recov, deaths,dRecov,dTotal,dDeaths;
-    ImageView redArrow,greenArrow, greyArrow;
-    LinearLayout layout_red,layout_blue,layout_green, layout_gray;
+    TextView total,active, recov, deaths, jData,test ;
+    private  static final String BASE_URL = "https://api.covid19india.org/";
+    private static final String TAG = "CasesInIndia";
 
 
-    DatabaseReference reff;
 
 
 
@@ -32,45 +33,60 @@ public class CasesInIndia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cases_in_india);
 
-        total = findViewById(R.id.total);
-        active = findViewById(R.id.active);
-        recov = findViewById(R.id.recov);
-        deaths = findViewById(R.id.deaths);
-        dRecov = findViewById(R.id.dRecov);
-        dTotal = findViewById(R.id.dTotal);
-        dDeaths = findViewById(R.id.dDeaths);
-        redArrow = findViewById(R.id.redArrow);
-        greyArrow = findViewById(R.id.greyArrow);
-        greenArrow = findViewById(R.id.greenArrow);
-        layout_red = findViewById(R.id.layout_red);
-        layout_blue = findViewById(R.id.layout_blue);
-        layout_green = findViewById(R.id.layout_green);
-        layout_gray = findViewById(R.id.layout_gray);
+        total = (TextView)findViewById(R.id.total);
+        active = (TextView)findViewById(R.id.active);
+        recov = (TextView)findViewById(R.id.recov);
+        deaths = (TextView)findViewById(R.id.deaths);
+        jData = (TextView)findViewById(R.id.jData);
+        test = findViewById(R.id.test);
 
-        AnimationDrawable adR = (AnimationDrawable)layout_red.getBackground();
-        adR.setEnterFadeDuration(2000);
-        adR.setExitFadeDuration(2000);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        adR.start();
-        AnimationDrawable adB = (AnimationDrawable)layout_blue.getBackground();
-        adB.setEnterFadeDuration(2000);
-        adB.setExitFadeDuration(2000);
-        adB.start();
-        AnimationDrawable adG = (AnimationDrawable)layout_green.getBackground();
-        adG.setEnterFadeDuration(2000);
-        adG.setExitFadeDuration(2000);
-        adG.start();
-        AnimationDrawable adGr = (AnimationDrawable)layout_gray.getBackground();
-        adGr.setEnterFadeDuration(2000);
-        adGr.setExitFadeDuration(2000);
-        adGr.start();
+        COVID19IndiaApi covid19IndiaApi = retrofit.create(COVID19IndiaApi.class);
+
+        Call<datajson> call = covid19IndiaApi.getdatajsons();
+
+        call.enqueue(new Callback<datajson>() {
+            @Override
+            public void onResponse(Call<datajson> call, Response<datajson> response) {
+
+                if (!response.isSuccessful()) {
+                    Toast.makeText(CasesInIndia.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                datajson data = response.body();
+                ArrayList<cases> s = data.getCases_time_series();
+                String str="";
+                for(cases c: s)
+                {
+                    str = c.getDailyconfirmed();
+                    total.setText(c.getTotalconfirmed());
+                    recov.setText(c.getTotalrecovered());
+                    deaths.setText(c.getTotaldeceased());
+                    int n = Integer.parseInt(c.getTotalconfirmed())-(Integer.parseInt(c.getTotaldeceased())+Integer.parseInt(c.getTotalrecovered()));
+                    active.setText(Integer.toString(n));
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<datajson> call, Throwable t) {
+
+                Toast.makeText(CasesInIndia.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
 
 
 
 
-                reff = FirebaseDatabase.getInstance().getReference().child("CasesInIndia");
+                /*reff = FirebaseDatabase.getInstance().getReference().child("CasesInIndia");
                 reff.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -79,40 +95,10 @@ public class CasesInIndia extends AppCompatActivity {
                         String rec = dataSnapshot.child("Recovered").getValue().toString();
                         String dea = dataSnapshot.child("Deaths").getValue().toString();
                         String migr = dataSnapshot.child("Migrated").getValue().toString();
-                        String dR = dataSnapshot.child("DailyRecovered").getValue().toString();
-                        String dT = dataSnapshot.child("DailyTotal").getValue().toString();
-                        String dD = dataSnapshot.child("DailyDeaths").getValue().toString();
-                        redArrow.setVisibility(View.GONE);
-                        greenArrow.setVisibility(View.GONE);
-                        greyArrow.setVisibility(View.GONE);
-                        dTotal.setVisibility(View.GONE);
-                        dRecov.setVisibility(View.GONE);
-                        dDeaths.setVisibility(View.GONE);
-
                         total.setText(tot);
                         active.setText(act);
                         recov.setText(rec);
                         deaths.setText(dea);
-                        dRecov.setText(dR);
-                        dTotal.setText(dT);
-                        dDeaths.setText(dD);
-                        if (!dR.equals("0"))
-                        {
-                            greenArrow.setVisibility(View.VISIBLE);
-                            dRecov.setVisibility(View.VISIBLE);
-
-                        }
-                        if (!dT.equals("0"))
-                        {
-                            redArrow.setVisibility(View.VISIBLE);
-                            dTotal.setVisibility(View.VISIBLE);
-                        }
-                        if (!dD.equals("0"))
-                        {
-                            greyArrow.setVisibility(View.VISIBLE);
-                            dDeaths.setVisibility(View.VISIBLE);
-
-                        }
                        
                     }
 
@@ -120,7 +106,7 @@ public class CasesInIndia extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });*/
 
 
 

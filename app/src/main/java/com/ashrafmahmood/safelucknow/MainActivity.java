@@ -4,33 +4,35 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ashrafmahmood.safelucknow.state_district_wise.DistrictWiseApi;
+import com.ashrafmahmood.safelucknow.state_district_wise.districtWise;
+import com.ashrafmahmood.safelucknow.state_district_wise.lucknowCases;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 4000;
+    private static final String TAG = "MainActivity";
 
-    TextView total,active, recov, deaths, rz, oz, gz, tvUpdate, tvLink,dRecov,dTotal,dDeaths;
+    TextView total,active, recov, deaths, rz, oz, gz, tvUpdate, tvLink;
     Button btnHotspot;
-    ImageView redArrow,greenArrow, greyArrow;
-    LinearLayout layout_red,layout_blue,layout_green, layout_gray;
 
 
 
@@ -50,42 +52,8 @@ public class MainActivity extends AppCompatActivity {
         active = findViewById(R.id.active);
         recov = findViewById(R.id.recov);
         deaths = findViewById(R.id.deaths);
-        dRecov = findViewById(R.id.dRecov);
-        dTotal = findViewById(R.id.dTotal);
-        dDeaths = findViewById(R.id.dDeaths);
-        redArrow = findViewById(R.id.redArrow);
-        greyArrow = findViewById(R.id.greyArrow);
-        greenArrow = findViewById(R.id.greenArrow);
 
         btnHotspot = findViewById(R.id.btnHotspot);
-
-
-        layout_red = findViewById(R.id.layout_red);
-        layout_blue = findViewById(R.id.layout_blue);
-        layout_green = findViewById(R.id.layout_green);
-        layout_gray = findViewById(R.id.layout_gray);
-
-        AnimationDrawable adR = (AnimationDrawable)layout_red.getBackground();
-        adR.setEnterFadeDuration(2000);
-        adR.setExitFadeDuration(2000);
-
-        adR.start();
-        AnimationDrawable adB = (AnimationDrawable)layout_blue.getBackground();
-        adB.setEnterFadeDuration(2000);
-        adB.setExitFadeDuration(2000);
-        adB.start();
-        AnimationDrawable adG = (AnimationDrawable)layout_green.getBackground();
-        adG.setEnterFadeDuration(2000);
-        adG.setExitFadeDuration(2000);
-        adG.start();
-        AnimationDrawable adGr = (AnimationDrawable)layout_gray.getBackground();
-        adGr.setEnterFadeDuration(2000);
-        adGr.setExitFadeDuration(2000);
-        adGr.start();
-        AnimationDrawable adbtn = (AnimationDrawable)btnHotspot.getBackground();
-        adbtn.setEnterFadeDuration(2000);
-        adbtn.setExitFadeDuration(2000);
-        adbtn.start();
 
         rz = findViewById(R.id.rz);
         oz = findViewById(R.id.oz);
@@ -115,26 +83,14 @@ public class MainActivity extends AppCompatActivity {
                     reff.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String tot = dataSnapshot.child("Total").getValue().toString();
+                        /*String tot = dataSnapshot.child("Total").getValue().toString();
                         String act = dataSnapshot.child("Active").getValue().toString();
                         String rec = dataSnapshot.child("Recovered").getValue().toString();
                         String dea = dataSnapshot.child("Deaths").getValue().toString();
                         String sta = dataSnapshot.child("Status").getValue().toString();
                         String up = dataSnapshot.child("UpdatesAvail").getValue().toString();
-                        final String upLink = dataSnapshot.child("UpdateLink").getValue().toString();
-                        String dR = dataSnapshot.child("DailyRecovered").getValue().toString();
-                        String dT = dataSnapshot.child("DailyTotal").getValue().toString();
-                        String dD = dataSnapshot.child("DailyDeaths").getValue().toString();
-
-                        redArrow.setVisibility(View.GONE);
-                        greenArrow.setVisibility(View.GONE);
-                        greyArrow.setVisibility(View.GONE);
-                        dTotal.setVisibility(View.GONE);
-                        dRecov.setVisibility(View.GONE);
-                        dDeaths.setVisibility(View.GONE);
-
-
-
+                        final String upLink = dataSnapshot.child("UpdateLink").getValue().toString();*/
+                         String sta = dataSnapshot.child("Status").getValue().toString();
                         if (sta.equalsIgnoreCase("R")) {
                             rz.setVisibility(View.VISIBLE);
                             oz.setVisibility(View.GONE);
@@ -151,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                             rz.setVisibility(View.GONE);
                         }
 
-                        if(up.equalsIgnoreCase("y"))
+                        /*if(up.equalsIgnoreCase("y"))
                         {
                             tvUpdate.setVisibility(View.VISIBLE);
                             tvLink.setVisibility(View.VISIBLE);
@@ -175,29 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         total.setText(tot);
                         active.setText(act);
                         recov.setText(rec);
-                        deaths.setText(dea);
-                        dRecov.setText(dR);
-                        dTotal.setText(dT);
-                        dDeaths.setText(dD);
-                        if (!dR.equals("0"))
-                        {
-                            greenArrow.setVisibility(View.VISIBLE);
-                            dRecov.setVisibility(View.VISIBLE);
-
-                        }
-                        if (!dT.equals("0"))
-                        {
-                            redArrow.setVisibility(View.VISIBLE);
-                            dTotal.setVisibility(View.VISIBLE);
-                        }
-                        if (!dD.equals("0"))
-                        {
-                            greyArrow.setVisibility(View.VISIBLE);
-                            dDeaths.setVisibility(View.VISIBLE);
-
-                        }
-
-
+                        deaths.setText(dea);*/
                     }
 
                     @Override
@@ -205,6 +139,47 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.covid19india.org/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        DistrictWiseApi districtWiseApi = retrofit.create(DistrictWiseApi.class);
+
+        Call<districtWise> call = districtWiseApi.getdistrictWise();
+        call.enqueue(new Callback<districtWise>() {
+            @Override
+            public void onResponse(Call<districtWise> call, Response<districtWise> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                districtWise data = response.body();
+
+                        lucknowCases lkoCase = data.getUttar_Pradesh().getDistrictData().getLucknow();
+
+                            active.setText(lkoCase.getActive());
+                            total.setText(lkoCase.getConfirmed());
+                            recov.setText(lkoCase.getRecovered());
+                            deaths.setText(lkoCase.getDeceased());
+
+
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<districtWise> call, Throwable t) {
+                Log.e(TAG, "onFailure: Something went wrong: " + t.getMessage() );
+                Toast.makeText(MainActivity.this, "Something went wrong"+t, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
 
 
 
