@@ -3,24 +3,24 @@
 
 
 
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
 
-    <item android:id="@+id/lko"
-        android:title="Cases in Lucknow" />
-    <item android:id="@+id/India"
-        android:title="@string/cases_in_india"
+
+    <item android:id="@+id/up"
+        android:title="Cases In UP"
          />
 
     <item android:id="@+id/more"
         android:title="@string/more"
          >
-        <menu>
+
             <item android:id="@+id/sources"
                 android:title="@string/sources" />
             <item android:id="@+id/about"
                 android:title="@string/about" />
-        </menu>
+
 
 
     </item>

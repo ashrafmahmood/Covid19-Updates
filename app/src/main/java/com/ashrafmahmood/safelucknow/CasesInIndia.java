@@ -2,10 +2,17 @@ package com.ashrafmahmood.safelucknow;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +41,12 @@ public class CasesInIndia extends AppCompatActivity {
 
     TextView total,active, recov, deaths, dTotal,dRecov,dDeaths;
     ImageView redArrow, greenArrow,greyArrow;
+    Button btnStatewise;
+
+
+
+
+
 
 
     DatabaseReference reff;
@@ -45,6 +58,11 @@ public class CasesInIndia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cases_in_india);
 
+
+
+
+
+        btnStatewise = findViewById(R.id.btnStatewise);
         total = findViewById(R.id.total);
         active = findViewById(R.id.active);
         recov = findViewById(R.id.recov);
@@ -62,6 +80,7 @@ public class CasesInIndia extends AppCompatActivity {
         redArrow.setVisibility(View.GONE);
         greenArrow.setVisibility(View.GONE);
         greyArrow.setVisibility(View.GONE);
+
 
 
         LinearLayout linearLayout1 = findViewById(R.id.layout_red);
@@ -86,6 +105,15 @@ public class CasesInIndia extends AppCompatActivity {
         animationDrawable4.start();
 
 
+        btnStatewise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(CasesInIndia.this,  com.ashrafmahmood.safelucknow.StatewiseCases.class);
+                startActivity(intent1);
+            }
+        });
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.covid19india.org/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -104,7 +132,10 @@ public class CasesInIndia extends AppCompatActivity {
                     return;
                 }
                 datajson data = response.body();
+                datajson data1 = response.body();
                 ArrayList<cases> s = data.getCases_time_series();
+                ArrayList<statewisedata> sd =data1.getStatewise();
+
                 NumberFormat myformat = NumberFormat.getInstance();
                 for(cases c: s)
                 {
@@ -134,6 +165,7 @@ public class CasesInIndia extends AppCompatActivity {
                     }
 
                 }
+
 
             }
 
@@ -172,11 +204,43 @@ public class CasesInIndia extends AppCompatActivity {
                     }
                 });*/
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId())
+        {
+
+
+            case R.id.up:
+                Intent intent2 = new Intent(CasesInIndia.this,  com.ashrafmahmood.safelucknow.CasesInUp.class);
+                startActivity(intent2);
+                return true;
 
 
 
 
+            case R.id.about:
+                Intent intent4 = new Intent(CasesInIndia.this,  com.ashrafmahmood.safelucknow.About.class);
+                startActivity(intent4);
+                return true;
 
 
+            case R.id.sources:
+                Intent intent5 = new Intent(CasesInIndia.this,  com.ashrafmahmood.safelucknow.Sources.class);
+                startActivity(intent5);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+
+        }
     }
 }

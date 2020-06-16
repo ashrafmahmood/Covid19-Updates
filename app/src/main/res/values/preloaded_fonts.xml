@@ -2,7 +2,11 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
+        <item>@font/abeezee</item>
+        <item>@font/abril_fatface</item>
+        <item>@font/amiko</item>
         <item>@font/anonymous_pro</item>
+        <item>@font/anton</item>
         <item>@font/baloo</item>
         <item>@font/bilbo_swash_caps</item>
         <item>@font/bitter</item>
@@ -10,6 +14,7 @@
         <item>@font/cagliostro</item>
         <item>@font/glegoo</item>
         <item>@font/holtwood_one_sc</item>
+        <item>@font/mclaren</item>
         <item>@font/miriam_libre</item>
     </array>
 </resources>

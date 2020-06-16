@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ashrafmahmood.safelucknow">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,14 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CasesInUp"></activity>
+        <activity android:name=".UPdistrict.UPDistrictWiseCases"></activity>
+        <activity android:name=".StatewiseCases" />
+        <activity android:name=".CasesInUp" />
         <activity android:name=".MainActivity" />
         <activity android:name=".DosDonts" />
         <activity android:name=".About" />
         <activity android:name=".Sources" />
         <activity android:name=".CasesInIndia" />
         <activity android:name=".Hotspots" />
-        <activity android:name=".Splash"
+        <activity
+            android:name=".Splash"
             android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

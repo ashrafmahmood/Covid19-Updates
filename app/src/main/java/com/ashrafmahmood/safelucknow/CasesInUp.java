@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -46,6 +47,7 @@ public class CasesInUp extends AppCompatActivity {
     Spinner rzd,ozd,gzd;
     ImageView refresh;
     ImageView redArrow, greenArrow,greyArrow;
+    Button btnDistrictwise;
 
     DatabaseReference reff;
 
@@ -63,6 +65,7 @@ public class CasesInUp extends AppCompatActivity {
         active = findViewById(R.id.active);
         recov = findViewById(R.id.recov);
         deaths = findViewById(R.id.deaths);
+        btnDistrictwise= findViewById(R.id.btnDistrictwise);
 
         dTotal = findViewById(R.id.dTotal);
         active = findViewById(R.id.active);
@@ -111,6 +114,14 @@ public class CasesInUp extends AppCompatActivity {
         animationDrawable4.setEnterFadeDuration(2000);
         animationDrawable4.setExitFadeDuration(2000);
         animationDrawable4.start();
+        btnDistrictwise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(CasesInUp.this,  com.ashrafmahmood.safelucknow.UPdistrict.UPDistrictWiseCases.class);
+                startActivity(intent1);
+
+            }
+        });
 
 
 
@@ -224,9 +235,9 @@ public class CasesInUp extends AppCompatActivity {
                         }
                     }
                 }
-                rNo.setText("Red = "+Integer.toString(r));
-                gNo.setText("Green = "+Integer.toString(g));
-                oNo.setText("Orange = "+Integer.toString(o));
+                rNo.setText("Red - "+Integer.toString(r));
+                gNo.setText("Green - "+Integer.toString(g));
+                oNo.setText("Orange -  "+Integer.toString(o));
 
 
 
@@ -238,6 +249,8 @@ public class CasesInUp extends AppCompatActivity {
 
             }
         });
+
+
 
 
 
@@ -332,8 +345,8 @@ public class CasesInUp extends AppCompatActivity {
 
 
     }
-
-    @Override
+/*
+   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
@@ -373,5 +386,5 @@ public class CasesInUp extends AppCompatActivity {
 
 
         }
-    }
+    }*/
 }

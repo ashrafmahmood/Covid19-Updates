@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#312E3C"
+    android:orientation="vertical"
+    tools:context=".StatewiseCases">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="4dp"
+
+            android:layout_weight="3"
+            app:cardCornerRadius="5dp"
+
+
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4A465B"
+
+                >
+
+                <TextView
+                    android:id="@+id/state"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/glegoo"
+                    android:gravity="left"
+                    android:text="District"
+                    android:textColor="#B0BEC5"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="4dp"
+
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="4"
+            app:cardCornerRadius="5dp"
+
+
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4A465B">
+
+                <TextView
+                    android:id="@+id/sTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/glegoo"
+                    android:gravity="center_horizontal"
+                    android:text="Total"
+                    android:textColor="#B0BEC5"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="4dp"
+
+            android:layout_weight="4"
+            app:cardCornerRadius="5dp"
+
+
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4A465B">
+
+                <TextView
+                    android:id="@+id/sActive"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/glegoo"
+                    android:gravity="center_horizontal"
+                    android:text="Active"
+                    android:textColor="#B0BEC5"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="4dp"
+
+            android:layout_weight="4"
+            app:cardCornerRadius="5dp"
+
+
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4A465B">
+
+                <TextView
+                    android:id="@+id/sRecov"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/glegoo"
+                    android:gravity="center_horizontal"
+                    android:text="Recov."
+                    android:textColor="#B0BEC5"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+
+            android:layout_weight="4"
+            app:cardCornerRadius="5dp"
+
+
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4A465B">
+
+                <TextView
+                    android:id="@+id/sDeaths"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/glegoo"
+                    android:gravity="center_horizontal"
+                    android:text="Deaths"
+                    android:textColor="#B0BEC5"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/districtList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
