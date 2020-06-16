@@ -52,7 +52,7 @@
                 android:text="COVID19 CASES IN INDIA"
                 android:textSize="22sp" />
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -77,7 +77,7 @@
                         android:id="@+id/tvrz"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
@@ -110,7 +110,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="right"
                         android:layout_marginLeft="2dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="5dp"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/glegoo"
                         android:text="@string/_00"
@@ -120,7 +120,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -145,7 +145,7 @@
                         android:id="@+id/textView8"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
@@ -161,7 +161,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="right"
                         android:layout_marginLeft="2dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="5dp"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/glegoo"
                         android:text="@string/_00"
@@ -171,7 +171,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -196,7 +196,7 @@
                         android:id="@+id/textView10"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
@@ -230,7 +230,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="right"
                         android:layout_marginLeft="2dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="5dp"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/glegoo"
                         android:text="@string/_00"
@@ -240,7 +240,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -265,7 +265,7 @@
                         android:id="@+id/textView12"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
@@ -300,7 +300,7 @@
 
                         android:layout_gravity="right"
                         android:layout_marginLeft="2dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="5dp"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/glegoo"
                         android:text="@string/_00"
@@ -321,7 +321,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
 
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
             app:cardCornerRadius="11dp"
 
             app:cardElevation="5dp"
@@ -340,7 +340,35 @@
                 android:shadowRadius="5"
                 android:text="Statewise Cases"
                 android:textColor="@color/gray"
-                android:textSize="20sp" />
+                android:textSize="19sp" />
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+
+            android:layout_marginRight="10dp"
+
+            android:layout_marginBottom="15dp"
+            app:cardCornerRadius="11dp"
+
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="false">
+
+            <Button
+                android:id="@+id/btnUPCases"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="@color/white"
+                android:fontFamily="@font/holtwood_one_sc"
+                android:shadowDx="5"
+                android:shadowDy="5"
+
+                android:shadowRadius="5"
+                android:text="Cases in Uttar Pradesh"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
         </androidx.cardview.widget.CardView>
 
         <ImageView

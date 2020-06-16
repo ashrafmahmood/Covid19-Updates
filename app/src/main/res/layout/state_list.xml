@@ -19,7 +19,7 @@
             android:layout_marginRight="2dp"
             android:layout_marginBottom="4dp"
 
-            android:layout_weight="3"
+            android:layout_weight="3.3"
             app:cardCornerRadius="5dp"
 
             android:background="#4A465B"
@@ -42,7 +42,7 @@
                     android:gravity="left"
                     android:text="State"
                     android:textColor="#B0BEC5"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -55,7 +55,7 @@
 
             android:layout_marginRight="1dp"
             android:layout_marginBottom="4dp"
-            android:layout_weight="4"
+            android:layout_weight="3.8"
             app:cardCornerRadius="5dp"
 
             android:background="#4A465B"
@@ -149,7 +149,7 @@
             android:layout_marginRight="1dp"
             android:layout_marginBottom="4dp"
             android:background="#4A465B"
-            android:layout_weight="4"
+            android:layout_weight="3.9"
             app:cardCornerRadius="5dp"
 
 

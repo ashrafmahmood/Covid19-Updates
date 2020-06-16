@@ -41,7 +41,7 @@ public class CasesInIndia extends AppCompatActivity {
 
     TextView total,active, recov, deaths, dTotal,dRecov,dDeaths;
     ImageView redArrow, greenArrow,greyArrow;
-    Button btnStatewise;
+    Button btnStatewise, btnUPCases;
 
 
 
@@ -58,6 +58,7 @@ public class CasesInIndia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cases_in_india);
         btnStatewise = findViewById(R.id.btnStatewise);
+        btnUPCases = findViewById(R.id.btnUPCases);
         total = findViewById(R.id.total);
         active = findViewById(R.id.active);
         recov = findViewById(R.id.recov);
@@ -105,6 +106,15 @@ public class CasesInIndia extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent1 = new Intent(CasesInIndia.this,  com.ashrafmahmood.safelucknow.StatewiseCases.class);
                 startActivity(intent1);
+            }
+        });
+
+        btnUPCases.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(CasesInIndia.this,  CasesInUp.class);
+                startActivity(intent1);
+
             }
         });
 
@@ -214,10 +224,7 @@ public class CasesInIndia extends AppCompatActivity {
         {
 
 
-            case R.id.up:
-                Intent intent2 = new Intent(CasesInIndia.this,  com.ashrafmahmood.safelucknow.CasesInUp.class);
-                startActivity(intent2);
-                return true;
+
 
 
 

@@ -43,12 +43,7 @@ public class UPDistrictCovid19Adapter extends RecyclerView.Adapter<UPDistrictCov
             redArrow = itemView.findViewById(R.id.redArrow);
             greenArrow = itemView.findViewById(R.id.greenArrow);
             greyArrow = itemView.findViewById(R.id.greyArrow);
-            redArrow.setVisibility(View.GONE);
-            greenArrow.setVisibility(View.GONE);
-            greyArrow.setVisibility(View.GONE);
-            DdTotal.setVisibility(View.GONE);
-            DdRecov.setVisibility(View.GONE);
-            DdDeaths.setVisibility(View.GONE);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,21 +76,21 @@ public class UPDistrictCovid19Adapter extends RecyclerView.Adapter<UPDistrictCov
         viewHolder.DdRecov.setText(data.get(i).getSdDeaths());
         viewHolder.dDeaths.setText(data.get(i).getsDeaths());
         viewHolder.DdDeaths.setText(data.get(i).getSdDeaths());
-        if(!data.get(i).getSdTotal().equals("0"))
+        if(data.get(i).getSdTotal().equals("0"))
         {
-            viewHolder.redArrow.setVisibility(View.VISIBLE);
-            viewHolder.DdTotal.setVisibility(View.VISIBLE);
+            viewHolder.redArrow.setVisibility(View.GONE);
+            viewHolder.DdTotal.setVisibility(View.GONE);
 
         }
-        if(!data.get(i).getSdRecov().equals("0"))
+        if(data.get(i).getSdRecov().equals("0"))
         {
-            viewHolder.greenArrow.setVisibility(View.VISIBLE);
-            viewHolder.DdRecov.setVisibility(View.VISIBLE);
+            viewHolder.greenArrow.setVisibility(View.GONE);
+            viewHolder.DdRecov.setVisibility(View.GONE);
         }
-        if(!data.get(i).getSdDeaths().equals("0"))
+        if(data.get(i).getSdDeaths().equals("0"))
         {
-            viewHolder.greyArrow.setVisibility(View.VISIBLE);
-            viewHolder.DdDeaths.setVisibility(View.VISIBLE);
+            viewHolder.greyArrow.setVisibility(View.GONE);
+            viewHolder.DdDeaths.setVisibility(View.GONE);
         }
 
     }

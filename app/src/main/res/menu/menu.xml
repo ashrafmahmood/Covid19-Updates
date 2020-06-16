@@ -5,13 +5,9 @@
 
 
 
-    <item android:id="@+id/up"
-        android:title="Cases in Uttar Pradesh"
-         />
 
-    <item android:id="@+id/more"
-        android:title="@string/more"
-         >
+
+
 
             <item android:id="@+id/sources"
                 android:title="@string/sources" />
@@ -20,5 +16,5 @@
 
 
 
-    </item>
+
 </menu>
