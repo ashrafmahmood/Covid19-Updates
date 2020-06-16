@@ -9,6 +9,7 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical"
+    android:background="@color/white"
 
 
     tools:context=".MainActivity">
@@ -313,7 +314,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
 
             android:layout_marginBottom="20dp"
@@ -331,8 +332,8 @@
                 android:fontFamily="@font/holtwood_one_sc"
                 android:shadowDx="5"
                 android:shadowDy="5"
-                android:shadowRadius="5"
 
+                android:shadowRadius="5"
                 android:text="Statewise Cases"
                 android:textColor="@color/gray"
                 android:textSize="20sp" />
