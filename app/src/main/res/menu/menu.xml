@@ -6,7 +6,7 @@
 
 
     <item android:id="@+id/up"
-        android:title="Cases In UP"
+        android:title="Cases in Uttar Pradesh"
          />
 
     <item android:id="@+id/more"

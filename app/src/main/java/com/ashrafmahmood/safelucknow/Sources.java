@@ -18,8 +18,7 @@ public class Sources extends AppCompatActivity {
         setContentView(R.layout.activity_sources);
         s1 = findViewById(R.id.s1);
         s2 = findViewById(R.id.s2);
-        s3 = findViewById(R.id.s3);
-        s4 = findViewById(R.id.s4);
+
         s5 = findViewById(R.id.s5);
 
         s1.setOnClickListener(new View.OnClickListener() {
@@ -38,23 +37,11 @@ public class Sources extends AppCompatActivity {
 
             }
         });
-        s3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://"+"en.wikipedia.org/wiki/COVID-19_pandemic_in_Uttar_Pradesh"));
-                startActivity(intent);
 
 
-            }
-        });
-        s4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://"+"www.jagran.com/uttar-pradesh/lucknow-city-coronavirus-hotspot-in-lucknow-three-new-hotspots-identified-in-lucknow-20242178.html"));
-                startActivity(intent);
 
-            }
-        });
+
+
         s5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

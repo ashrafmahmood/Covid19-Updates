@@ -57,11 +57,6 @@ public class CasesInIndia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cases_in_india);
-
-
-
-
-
         btnStatewise = findViewById(R.id.btnStatewise);
         total = findViewById(R.id.total);
         active = findViewById(R.id.active);
