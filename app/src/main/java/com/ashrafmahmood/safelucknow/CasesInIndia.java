@@ -1,10 +1,5 @@
 package com.ashrafmahmood.safelucknow;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -18,15 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.COVID19IndiaApi;
 import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.cases;
 import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.datajson;
 import com.ashrafmahmood.safelucknow.Cases_time_series_statewise_tested.statewisedata;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -39,19 +32,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CasesInIndia extends AppCompatActivity {
 
-    TextView total,active, recov, deaths, dTotal,dRecov,dDeaths;
-    ImageView redArrow, greenArrow,greyArrow;
+    TextView total, active, recov, deaths, dTotal, dRecov, dDeaths;
+    ImageView redArrow, greenArrow, greyArrow;
     Button btnStatewise, btnUPCases;
-
-
-
-
-
-
-
-    DatabaseReference reff;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +59,6 @@ public class CasesInIndia extends AppCompatActivity {
         redArrow.setVisibility(View.GONE);
         greenArrow.setVisibility(View.GONE);
         greyArrow.setVisibility(View.GONE);
-
 
 
         LinearLayout linearLayout1 = findViewById(R.id.layout_red);
@@ -104,7 +86,7 @@ public class CasesInIndia extends AppCompatActivity {
         btnStatewise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(CasesInIndia.this,  com.ashrafmahmood.safelucknow.StatewiseCases.class);
+                Intent intent1 = new Intent(CasesInIndia.this, com.ashrafmahmood.safelucknow.StatewiseCases.class);
                 startActivity(intent1);
             }
         });
@@ -112,7 +94,7 @@ public class CasesInIndia extends AppCompatActivity {
         btnUPCases.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(CasesInIndia.this,  CasesInUp.class);
+                Intent intent1 = new Intent(CasesInIndia.this, CasesInUp.class);
                 startActivity(intent1);
 
             }
@@ -139,31 +121,27 @@ public class CasesInIndia extends AppCompatActivity {
                 datajson data = response.body();
                 datajson data1 = response.body();
                 ArrayList<cases> s = data.getCases_time_series();
-                ArrayList<statewisedata> sd =data1.getStatewise();
+                ArrayList<statewisedata> sd = data1.getStatewise();
 
                 NumberFormat myformat = NumberFormat.getInstance();
-                for(cases c: s)
-                {
+                for (cases c : s) {
 
-                        total.setText(myformat.format(Integer.parseInt(c.getTotalconfirmed())));
-                        recov.setText(myformat.format(Integer.parseInt(c.getTotalrecovered())));
-                        deaths.setText(myformat.format(Integer.parseInt(c.getTotaldeceased())));
+                    total.setText(myformat.format(Integer.parseInt(c.getTotalconfirmed())));
+                    recov.setText(myformat.format(Integer.parseInt(c.getTotalrecovered())));
+                    deaths.setText(myformat.format(Integer.parseInt(c.getTotaldeceased())));
 
-                        active.setText(myformat.format(Integer.parseInt(c.getTotalconfirmed())-(Integer.parseInt(c.getTotaldeceased())+Integer.parseInt(c.getTotalrecovered()))));
-                        if (!c.getDailyconfirmed().equals("0"))
-                        {
-                            dTotal.setText(myformat.format(Integer.parseInt(c.getDailyconfirmed())));
-                            dTotal.setVisibility(View.VISIBLE);
-                            redArrow.setVisibility(View.VISIBLE);
-                        }
-                    if (!c.getDailyrecovered().equals("0"))
-                    {
+                    active.setText(myformat.format(Integer.parseInt(c.getTotalconfirmed()) - (Integer.parseInt(c.getTotaldeceased()) + Integer.parseInt(c.getTotalrecovered()))));
+                    if (!c.getDailyconfirmed().equals("0")) {
+                        dTotal.setText(myformat.format(Integer.parseInt(c.getDailyconfirmed())));
+                        dTotal.setVisibility(View.VISIBLE);
+                        redArrow.setVisibility(View.VISIBLE);
+                    }
+                    if (!c.getDailyrecovered().equals("0")) {
                         dRecov.setText(myformat.format(Integer.parseInt(c.getDailyrecovered())));
                         dRecov.setVisibility(View.VISIBLE);
                         greenArrow.setVisibility(View.VISIBLE);
                     }
-                    if (!c.getDailydeceased().equals("0"))
-                    {
+                    if (!c.getDailydeceased().equals("0")) {
                         dDeaths.setText(myformat.format(Integer.parseInt(c.getDailydeceased())));
                         dDeaths.setVisibility(View.VISIBLE);
                         greyArrow.setVisibility(View.VISIBLE);
@@ -183,33 +161,8 @@ public class CasesInIndia extends AppCompatActivity {
         });
 
 
-
-
-
-
-                /*reff = FirebaseDatabase.getInstance().getReference().child("CasesInIndia");
-                reff.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String tot = dataSnapshot.child("Total").getValue().toString();
-                        String act = dataSnapshot.child("Active").getValue().toString();
-                        String rec = dataSnapshot.child("Recovered").getValue().toString();
-                        String dea = dataSnapshot.child("Deaths").getValue().toString();
-                        String migr = dataSnapshot.child("Migrated").getValue().toString();
-                        total.setText(tot);
-                        active.setText(act);
-                        recov.setText(rec);
-                        deaths.setText(dea);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -217,26 +170,20 @@ public class CasesInIndia extends AppCompatActivity {
 
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId())
-        {
-
-
-
-
-
-
+        switch (item.getItemId()) {
 
             case R.id.about:
-                Intent intent4 = new Intent(CasesInIndia.this,  com.ashrafmahmood.safelucknow.About.class);
+                Intent intent4 = new Intent(CasesInIndia.this, com.ashrafmahmood.safelucknow.About.class);
                 startActivity(intent4);
                 return true;
 
 
             case R.id.sources:
-                Intent intent5 = new Intent(CasesInIndia.this,  com.ashrafmahmood.safelucknow.Sources.class);
+                Intent intent5 = new Intent(CasesInIndia.this, com.ashrafmahmood.safelucknow.Sources.class);
                 startActivity(intent5);
                 return true;
             default:

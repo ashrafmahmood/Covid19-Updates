@@ -1,6 +1,5 @@
 package com.ashrafmahmood.safelucknow;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,11 +19,7 @@ import com.ashrafmahmood.safelucknow.districtzones.zones;
 import com.ashrafmahmood.safelucknow.state_district_wise.DistrictWiseApi;
 import com.ashrafmahmood.safelucknow.state_district_wise.districtWise;
 import com.ashrafmahmood.safelucknow.state_district_wise.lucknowCases;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -40,21 +35,18 @@ public class MainActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 4000;
     private static final String TAG = "MainActivity";
 
-    TextView total,active, recov, deaths, rz, oz, gz, tvUpdate, tvLink, dTotal,dRecov,dDeaths;
+    TextView total, active, recov, deaths, rz, oz, gz, tvUpdate, tvLink, dTotal, dRecov, dDeaths;
     Button btnHotspot;
-    ImageView redArrow, greenArrow,greyArrow;
+    ImageView redArrow, greenArrow, greyArrow;
 
 
     DatabaseReference reff;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
 
         total = findViewById(R.id.total);
@@ -113,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         btnHotspot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(MainActivity.this,  com.ashrafmahmood.safelucknow.Hotspots.class);
+                Intent intent1 = new Intent(MainActivity.this, com.ashrafmahmood.safelucknow.Hotspots.class);
                 startActivity(intent1);
             }
         });
@@ -200,36 +192,33 @@ public class MainActivity extends AppCompatActivity {
 
                 districtWise data = response.body();
 
-                        lucknowCases lkoCase = data.getUttar_Pradesh().getDistrictData().getLucknow();
+                lucknowCases lkoCase = data.getUttar_Pradesh().getDistrictData().getLucknow();
                 NumberFormat myformat = NumberFormat.getInstance();
-                            active.setText(myformat.format(Integer.parseInt(lkoCase.getActive())));
-                            total.setText(myformat.format(Integer.parseInt(lkoCase.getConfirmed())));
-                            recov.setText(myformat.format(Integer.parseInt(lkoCase.getRecovered())));
-                            deaths.setText(myformat.format(Integer.parseInt(lkoCase.getDeceased())));
-                            if(!lkoCase.getDelta().getConfirmed().equals("0"))
-                            {
-                                dTotal.setText(myformat.format(Integer.parseInt(lkoCase.getDelta().getConfirmed())));
-                                dTotal.setVisibility(View.VISIBLE);
-                                redArrow.setVisibility(View.VISIBLE);
-                            }
-                            if (!lkoCase.getDelta().getRecovered().equals("0"))
-                            {
-                                dRecov.setText(myformat.format(Integer.parseInt(lkoCase.getDelta().getRecovered())));
-                                dRecov.setVisibility(View.VISIBLE);
-                                greenArrow.setVisibility(View.VISIBLE);
-                            }
-                            if(!lkoCase.getDelta().getDeceased().equals("0"))
-                            {
-                                dDeaths.setText(myformat.format(Integer.parseInt(lkoCase.getDelta().getDeceased())));
-                                dDeaths.setVisibility(View.VISIBLE);
-                                greyArrow.setVisibility(View.VISIBLE);
-                            }
+                active.setText(myformat.format(Integer.parseInt(lkoCase.getActive())));
+                total.setText(myformat.format(Integer.parseInt(lkoCase.getConfirmed())));
+                recov.setText(myformat.format(Integer.parseInt(lkoCase.getRecovered())));
+                deaths.setText(myformat.format(Integer.parseInt(lkoCase.getDeceased())));
+                if (!lkoCase.getDelta().getConfirmed().equals("0")) {
+                    dTotal.setText(myformat.format(Integer.parseInt(lkoCase.getDelta().getConfirmed())));
+                    dTotal.setVisibility(View.VISIBLE);
+                    redArrow.setVisibility(View.VISIBLE);
+                }
+                if (!lkoCase.getDelta().getRecovered().equals("0")) {
+                    dRecov.setText(myformat.format(Integer.parseInt(lkoCase.getDelta().getRecovered())));
+                    dRecov.setVisibility(View.VISIBLE);
+                    greenArrow.setVisibility(View.VISIBLE);
+                }
+                if (!lkoCase.getDelta().getDeceased().equals("0")) {
+                    dDeaths.setText(myformat.format(Integer.parseInt(lkoCase.getDelta().getDeceased())));
+                    dDeaths.setVisibility(View.VISIBLE);
+                    greyArrow.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
             public void onFailure(Call<districtWise> call, Throwable t) {
-                Log.e(TAG, "onFailure: Something went wrong: " + t.getMessage() );
-                Toast.makeText(MainActivity.this, "Something went wrong"+t, Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onFailure: Something went wrong: " + t.getMessage());
+                Toast.makeText(MainActivity.this, "Something went wrong" + t, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -243,27 +232,20 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                int r=0, o=0, g=0;
+                int r = 0, o = 0, g = 0;
                 zonedata zdata = response.body();
                 ArrayList<zones> z1 = zdata.getZones();
-                for(zones z: z1)
-                {
-                    if(z.getDistrict().equals("Lucknow"))
-                    {
-                        if(z.getZone().equals("Red"))
-                        {
+                for (zones z : z1) {
+                    if (z.getDistrict().equals("Lucknow")) {
+                        if (z.getZone().equals("Red")) {
                             rz.setVisibility(View.VISIBLE);
                             oz.setVisibility(View.GONE);
                             gz.setVisibility(View.GONE);
-                        }
-                        else if(z.getZone().equals("Orange"))
-                        {
+                        } else if (z.getZone().equals("Orange")) {
                             oz.setVisibility(View.VISIBLE);
                             rz.setVisibility(View.GONE);
                             gz.setVisibility(View.GONE);
-                        }
-                        else if(z.getZone().equals("Green"))
-                        {
+                        } else if (z.getZone().equals("Green")) {
                             gz.setVisibility(View.VISIBLE);
                             oz.setVisibility(View.GONE);
                             rz.setVisibility(View.GONE);
@@ -273,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 }
-
 
 
             }
@@ -286,14 +267,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
     }
-
 
 
 }

@@ -73,7 +73,7 @@ public class UPDistrictCovid19Adapter extends RecyclerView.Adapter<UPDistrictCov
         viewHolder.DdTotal.setText(data.get(i).getSdTotal());
         viewHolder.dActive.setText(data.get(i).getsActive());
         viewHolder.dRecov.setText(data.get(i).getsRecov());
-        viewHolder.DdRecov.setText(data.get(i).getSdDeaths());
+        viewHolder.DdRecov.setText(data.get(i).getSdRecov());
         viewHolder.dDeaths.setText(data.get(i).getsDeaths());
         viewHolder.DdDeaths.setText(data.get(i).getSdDeaths());
         if(data.get(i).getSdTotal().equals("0"))
