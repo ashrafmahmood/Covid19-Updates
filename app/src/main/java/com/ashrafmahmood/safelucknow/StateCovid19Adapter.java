@@ -42,6 +42,7 @@ public class StateCovid19Adapter extends RecyclerView.Adapter<StateCovid19Adapte
             greyArrow = itemView.findViewById(R.id.greyArrow);
 
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -73,21 +74,27 @@ public class StateCovid19Adapter extends RecyclerView.Adapter<StateCovid19Adapte
         viewHolder.dsRecov.setText(data.get(i).getSdRecov());
         viewHolder.sDeaths.setText(data.get(i).getsDeaths());
         viewHolder.dsDeaths.setText(data.get(i).getSdDeaths());
-        if(data.get(i).getSdTotal().equals("0"))
+        viewHolder.redArrow.setVisibility(View.GONE);
+        viewHolder.greenArrow.setVisibility(View.GONE);
+        viewHolder.greyArrow.setVisibility(View.GONE);
+        viewHolder.dsTotal.setVisibility(View.GONE);
+        viewHolder.dsRecov.setVisibility(View.GONE);
+        viewHolder.dsDeaths.setVisibility(View.GONE);
+        if(!data.get(i).getSdTotal().equals("0"))
         {
-            viewHolder.redArrow.setVisibility(View.GONE);
-            viewHolder.dsTotal.setVisibility(View.GONE);
+            viewHolder.redArrow.setVisibility(View.VISIBLE);
+            viewHolder.dsTotal.setVisibility(View.VISIBLE);
 
         }
-        if(data.get(i).getSdRecov().equals("0"))
+        if(!data.get(i).getSdRecov().equals("0"))
         {
-            viewHolder.greenArrow.setVisibility(View.GONE);
-            viewHolder.dsRecov.setVisibility(View.GONE);
+            viewHolder.greenArrow.setVisibility(View.VISIBLE);
+            viewHolder.dsRecov.setVisibility(View.VISIBLE);
         }
-        if(data.get(i).getSdDeaths().equals("0"))
+        if(!data.get(i).getSdDeaths().equals("0"))
         {
-            viewHolder.greyArrow.setVisibility(View.GONE);
-            viewHolder.dsDeaths.setVisibility(View.GONE);
+            viewHolder.greyArrow.setVisibility(View.VISIBLE);
+            viewHolder.dsDeaths.setVisibility(View.VISIBLE);
         }
 
     }

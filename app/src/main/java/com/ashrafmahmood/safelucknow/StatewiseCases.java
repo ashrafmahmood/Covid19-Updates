@@ -80,6 +80,7 @@ public class StatewiseCases extends AppCompatActivity {
                         statedata.add(new StateCovid19(swd.getState(),swd.getConfirmed(),swd.getDeltaconfirmed(),swd.getActive(),swd.getRecovered(),swd.getDeltarecovered(),swd.getDeaths(),swd.getDeltadeaths()));
                     }}
 
+
             }
 
             @Override

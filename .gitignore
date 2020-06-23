@@ -133,3 +133,4 @@ fabric.properties
 fastlane.json
 key.jks
 secrets.tar
+google-services.json
