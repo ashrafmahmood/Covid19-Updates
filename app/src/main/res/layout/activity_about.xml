@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
 
             android:gravity="center_horizontal"
-            android:text="CodeRascals"
+            android:text="Ashraf Mahmood"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
